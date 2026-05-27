@@ -3,12 +3,18 @@ jqassistant:
     - group-id: org.jqassistant.plugin
       artifact-id: jqassistant-context-mapper-plugin
       version: ${jqassistant-context-mapper-plugin.version}
+    - group-id: org.jqassistant.plugin
+      artifact-id: jqassistant-jmolecules-plugin
+      version: ${jqassistant-jmolecules-plugin.version}
     # seed4j-needle-jqassistant-plugin
 
   analyze:
     concept:
       # seed4j-needle-jqassistant-analyze-concept
     groups:
+      - jmolecules-ddd:Default
+      - jmolecules-hexagonal:Default
+      - jmolecules-event:Default
       # seed4j-needle-jqassistant-analyze-group
     execute-applied-concepts: true
     report:

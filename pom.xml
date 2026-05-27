@@ -29,6 +29,11 @@
         <artifactId>jqassistant-context-mapper-plugin</artifactId>
         <version>${jqassistant-context-mapper-plugin.version}</version>
       </dependency>
+      <dependency>
+        <groupId>org.jqassistant.plugin</groupId>
+        <artifactId>jqassistant-jmolecules-plugin</artifactId>
+        <version>${jqassistant-jmolecules-plugin.version}</version>
+      </dependency>
     </dependencies>
   </dependencyManagement>
   <dependencies>
@@ -105,6 +110,7 @@
     <jqassistant-asciidoctorj-extensions.version>1.1.0</jqassistant-asciidoctorj-extensions.version>
     <jqwik.version>1.9.3</jqwik.version>
     <modernizer-maven-plugin.version>3.2.0</modernizer-maven-plugin.version>
+    <jqassistant-jmolecules-plugin.version>2.1.0-M4</jqassistant-jmolecules-plugin.version>
   </properties>
 
   <build>
