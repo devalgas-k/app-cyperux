@@ -315,6 +315,7 @@
     <checksum-maven-plugin.version>1.11</checksum-maven-plugin.version>
     <maven-antrun-plugin.version>3.2.0</maven-antrun-plugin.version>
     <htmx-webjars.version>2.0.8</htmx-webjars.version>
+    <openapi-backwards-compat-maven-plugin.version>1.0.3</openapi-backwards-compat-maven-plugin.version>
   </properties>
   <profiles>
     <profile>
@@ -639,6 +640,21 @@
             </apis>
           </configuration>
         </plugin>
+        <plugin>
+          <groupId>io.kemtoa.openapi</groupId>
+          <artifactId>openapi-backwards-compat-maven-plugin</artifactId>
+          <version>${openapi-backwards-compat-maven-plugin.version}</version>
+          <executions>
+            <execution>
+              <goals>
+                <goal>backwards-compatibility-check</goal>
+              </goals>
+            </execution>
+          </executions>
+          <configuration>
+            <openApiSourceDir>${project.build.directory}</openApiSourceDir>
+          </configuration>
+        </plugin>
       </plugins>
     </pluginManagement>
     <plugins>
@@ -951,6 +967,10 @@
             </configuration>
           </execution>
         </executions>
+      </plugin>
+      <plugin>
+        <groupId>io.kemtoa.openapi</groupId>
+        <artifactId>openapi-backwards-compat-maven-plugin</artifactId>
       </plugin>
     </plugins>
     <defaultGoal>spring-boot:run</defaultGoal>
