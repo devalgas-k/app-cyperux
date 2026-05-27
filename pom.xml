@@ -41,6 +41,11 @@
         <type>pom</type>
         <scope>import</scope>
       </dependency>
+      <dependency>
+        <groupId>org.jqassistant.plugin</groupId>
+        <artifactId>jqassistant-spring-plugin</artifactId>
+        <version>${jqassistant-spring-plugin.version}</version>
+      </dependency>
     </dependencies>
   </dependencyManagement>
   <dependencies>
@@ -135,6 +140,7 @@
     <sonar-maven-plugin.version>5.5.0.6356</sonar-maven-plugin.version>
     <spring-boot.version>4.0.1</spring-boot.version>
     <testcontainers.version>2.0.3</testcontainers.version>
+    <jqassistant-spring-plugin.version>2.4.0</jqassistant-spring-plugin.version>
   </properties>
 
   <build>
