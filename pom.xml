@@ -141,6 +141,12 @@
       <version>${testcontainers.version}</version>
       <scope>test</scope>
     </dependency>
+    <dependency>
+      <groupId>org.reflections</groupId>
+      <artifactId>reflections</artifactId>
+      <version>${reflections.version}</version>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
 
   <properties>
@@ -177,6 +183,7 @@
     <jqassistant-spring-plugin.version>2.4.0</jqassistant-spring-plugin.version>
     <logstash-logback-encoder.version>9.0</logstash-logback-encoder.version>
     <maven-resources-plugin.version>3.4.0</maven-resources-plugin.version>
+    <reflections.version>0.10.2</reflections.version>
   </properties>
   <profiles>
     <profile>
