@@ -112,6 +112,10 @@
       <optional>true</optional>
     </dependency>
     <dependency>
+      <groupId>com.github.ben-manes.caffeine</groupId>
+      <artifactId>caffeine</artifactId>
+    </dependency>
+    <dependency>
       <groupId>net.jqwik</groupId>
       <artifactId>jqwik</artifactId>
       <version>${jqwik.version}</version>
@@ -164,7 +168,6 @@
     <jqassistant-spring-plugin.version>2.4.0</jqassistant-spring-plugin.version>
     <logstash-logback-encoder.version>9.0</logstash-logback-encoder.version>
     <maven-resources-plugin.version>3.4.0</maven-resources-plugin.version>
-    <spring.profiles.active></spring.profiles.active>
   </properties>
   <profiles>
     <profile>

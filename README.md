@@ -52,5 +52,6 @@ docker compose -f src/main/docker/postgresql.yml up -d
 - [PostgreSQL](documentation/postgresql.md)
 - [Logs Spy](documentation/logs-spy.md)
 - [Dev tools](documentation/dev-tools.md)
+- [Caffeine](documentation/caffeine.md)
 
 <!-- seed4j-needle-documentation -->
