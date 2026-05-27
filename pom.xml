@@ -104,6 +104,7 @@
     <asciidoctor-maven-plugin.version>3.2.0</asciidoctor-maven-plugin.version>
     <jqassistant-asciidoctorj-extensions.version>1.1.0</jqassistant-asciidoctorj-extensions.version>
     <jqwik.version>1.9.3</jqwik.version>
+    <modernizer-maven-plugin.version>3.2.0</modernizer-maven-plugin.version>
   </properties>
 
   <build>
@@ -292,6 +293,24 @@
             </attributes>
           </configuration>
         </plugin>
+        <plugin>
+          <groupId>org.gaul</groupId>
+          <artifactId>modernizer-maven-plugin</artifactId>
+          <version>${modernizer-maven-plugin.version}</version>
+          <executions>
+            <execution>
+              <id>modernizer</id>
+              <phase>verify</phase>
+              <goals>
+                <goal>modernizer</goal>
+              </goals>
+            </execution>
+          </executions>
+          <configuration>
+            <javaVersion>${java.version}</javaVersion>
+            <failOnViolations>true</failOnViolations>
+          </configuration>
+        </plugin>
       </plugins>
     </pluginManagement>
     <plugins>
@@ -430,6 +449,10 @@
       <plugin>
         <groupId>org.asciidoctor</groupId>
         <artifactId>asciidoctor-maven-plugin</artifactId>
+      </plugin>
+      <plugin>
+        <groupId>org.gaul</groupId>
+        <artifactId>modernizer-maven-plugin</artifactId>
       </plugin>
     </plugins>
   </build>
