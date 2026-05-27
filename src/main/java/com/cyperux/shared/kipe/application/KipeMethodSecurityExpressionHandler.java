@@ -1,0 +1,57 @@
+package com.cyperux.shared.kipe.application;
+
+import java.lang.reflect.Method;
+import java.util.Optional;
+import java.util.function.Supplier;
+import org.aopalliance.intercept.MethodInvocation;
+import org.jspecify.annotations.Nullable;
+import org.springframework.aop.framework.AopProxyUtils;
+import org.springframework.aop.support.AopUtils;
+import org.springframework.context.expression.MethodBasedEvaluationContext;
+import org.springframework.expression.EvaluationContext;
+import org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler;
+import org.springframework.security.access.expression.method.MethodSecurityExpressionOperations;
+import org.springframework.security.authorization.DefaultAuthorizationManagerFactory;
+import org.springframework.security.core.Authentication;
+
+class KipeMethodSecurityExpressionHandler extends DefaultMethodSecurityExpressionHandler {
+
+  private final AccessEvaluator evaluator;
+
+  KipeMethodSecurityExpressionHandler(AccessEvaluator evaluator) {
+    this.evaluator = evaluator;
+  }
+
+  @Override
+  public EvaluationContext createEvaluationContext(Supplier<? extends @Nullable Authentication> authentication, MethodInvocation methodInvocation) {
+    MethodSecurityExpressionOperations expressionRoot = buildExpressionRoot(authentication, methodInvocation);
+
+    var context = new MethodBasedEvaluationContext(
+      expressionRoot,
+      getSpecificMethod(methodInvocation),
+      methodInvocation.getArguments(),
+      getParameterNameDiscoverer()
+    );
+
+    context.setBeanResolver(getBeanResolver());
+
+    return context;
+  }
+
+  private static Method getSpecificMethod(MethodInvocation methodInvocation) {
+    Class<?> targetClass = Optional.ofNullable(methodInvocation.getThis()).map(AopProxyUtils::ultimateTargetClass).orElse(null);
+    return AopUtils.getMostSpecificMethod(methodInvocation.getMethod(), targetClass);
+  }
+
+  private MethodSecurityExpressionOperations buildExpressionRoot(
+    Supplier<? extends @Nullable Authentication> authentication,
+    MethodInvocation methodInvocation
+  ) {
+    var expressionRoot = new KipeMethodSecurityExpressionRoot(authentication, methodInvocation, evaluator);
+
+    expressionRoot.setAuthorizationManagerFactory(new DefaultAuthorizationManagerFactory<>());
+    expressionRoot.setPermissionEvaluator(getPermissionEvaluator());
+
+    return expressionRoot;
+  }
+}
