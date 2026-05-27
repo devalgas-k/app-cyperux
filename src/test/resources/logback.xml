@@ -16,5 +16,8 @@
   <logger name="net.logstash.logback" level="ERROR" />
   <logger name="org.ehcache" level="WARN" />
   <logger name="com.tngtech.archunit" level="WARN" />
+  <logger name="org.hibernate.validator" level="WARN" />
+  <logger name="org.hibernate.orm" level="WARN" />
+  <logger name="org.hibernate.ejb.HibernatePersistence" level="OFF" />
   <!-- seed4j-needle-logback-add-log -->
 </configuration>
