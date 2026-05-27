@@ -14,5 +14,6 @@
   <logger name="org.postgresql" level="WARN" />
   <logger name="org.jboss.logging" level="WARN" />
   <logger name="net.logstash.logback" level="ERROR" />
+  <logger name="org.ehcache" level="WARN" />
   <!-- seed4j-needle-logback-add-log -->
 </configuration>

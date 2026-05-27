@@ -41,3 +41,7 @@ application:
         port: 5000
         ring-buffer-size: 8192
         shutdown_grace_period: PT1M
+  cache:
+    ehcache:
+      max-entries: 100
+      time-to-live-seconds: 3600
