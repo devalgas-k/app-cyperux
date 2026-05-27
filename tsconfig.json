@@ -6,7 +6,6 @@
     "composite": false,
     "types": ["vitest/globals"],
     "baseUrl": ".",
-    "erasableSyntaxOnly": false,
     "paths": {
       "@/*": ["src/main/webapp/app/*"],
       "@assets/*": ["src/main/webapp/assets/*"]

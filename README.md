@@ -43,20 +43,10 @@ docker compose -f src/main/docker/postgresql.yml up -d
 docker compose -f src/main/docker/keycloak.yml up -d
 ```
 
+
 <!-- seed4j-needle-startupCommand -->
 
-## Documentation Complète
-
-Pour comprendre l'architecture, l'API ou les processus de développement, référez-vous aux documents suivants :
-
-- [Contexte IA & Vue d'ensemble (AI_CONTEXT.md)](documentation/AI_CONTEXT.md)
-- [Architecture Technique (ARCHITECTURE.md)](documentation/ARCHITECTURE.md)
-- [Documentation API (API.md)](documentation/API.md)
-- [Base de Données (DATABASE.md)](documentation/DATABASE.md)
-- [Guide de Développement (DEVELOPMENT.md)](documentation/DEVELOPMENT.md)
-- [Guide de Déploiement (DEPLOYMENT.md)](documentation/DEPLOYMENT.md)
-
-### Autres documentations techniques (dossier documentation/)
+## Documentation
 
 - [Hexagonal architecture](documentation/hexagonal-architecture.md)
 - [Front hexagonal architecture](documentation/front-hexagonal-architecture.md)
