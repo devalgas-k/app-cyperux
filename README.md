@@ -50,5 +50,6 @@ docker compose -f src/main/docker/postgresql.yml up -d
 - [Property Based Testing](documentation/property-based-testing.md)
 - [sonar](documentation/sonar.md)
 - [PostgreSQL](documentation/postgresql.md)
+- [Logs Spy](documentation/logs-spy.md)
 
 <!-- seed4j-needle-documentation -->
