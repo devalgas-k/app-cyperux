@@ -10,3 +10,6 @@ spring:
     password: ''
     url: jdbc:tc:postgresql:18.1:///cyperux?TC_TMPFS=/testtmpfs:rw
     username: cyperux
+  docker:
+    compose:
+      enabled: false
