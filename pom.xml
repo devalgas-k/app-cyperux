@@ -78,6 +78,11 @@
       <artifactId>jmolecules-events</artifactId>
     </dependency>
     <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-lang3</artifactId>
+      <version>${commons-lang3.version}</version>
+    </dependency>
+    <dependency>
       <groupId>net.jqwik</groupId>
       <artifactId>jqwik</artifactId>
       <version>${jqwik.version}</version>
@@ -111,6 +116,7 @@
     <jqwik.version>1.9.3</jqwik.version>
     <modernizer-maven-plugin.version>3.2.0</modernizer-maven-plugin.version>
     <jqassistant-jmolecules-plugin.version>2.1.0-M4</jqassistant-jmolecules-plugin.version>
+    <commons-lang3.version>3.20.0</commons-lang3.version>
   </properties>
 
   <build>
