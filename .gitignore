@@ -138,3 +138,5 @@ infinitest.filters
 src/test/resources/**/*.received.txt
 # JQwik
 .jqwik-database
+# Maven Wrapper
+!.mvn/wrapper/maven-wrapper.jar
