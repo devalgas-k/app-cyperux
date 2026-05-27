@@ -1,4 +1,5 @@
 # This configuration is intended for development purpose, it's **your** responsibility to harden it for production
+name: app-cyperux
 services:
   sonar:
     image: sonarqube:25.12.0.117093-community
