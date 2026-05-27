@@ -231,6 +231,9 @@
     <archunit-junit5.version>1.4.1</archunit-junit5.version>
     <jooq.version>3.20.10</jooq.version>
     <thymeleaf-layout-dialect.version>3.4.0</thymeleaf-layout-dialect.version>
+    <frontend-maven-plugin.version>2.0.0</frontend-maven-plugin.version>
+    <npm.version>11.7.0</npm.version>
+    <node.version>v24.12.0</node.version>
   </properties>
   <profiles>
     <profile>
@@ -678,6 +681,57 @@
               <directory>target/generated-sources/jooq</directory>
             </target>
           </generator>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>com.github.eirslett</groupId>
+        <artifactId>frontend-maven-plugin</artifactId>
+        <version>${frontend-maven-plugin.version}</version>
+        <executions>
+          <execution>
+            <id>install-node-and-npm</id>
+            <goals>
+              <goal>install-node-and-npm</goal>
+            </goals>
+            <configuration>
+              <nodeVersion>${node.version}</nodeVersion>
+              <npmVersion>${npm.version}</npmVersion>
+            </configuration>
+          </execution>
+          <execution>
+            <id>npm install</id>
+            <goals>
+              <goal>npm</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>build front</id>
+            <phase>generate-resources</phase>
+            <goals>
+              <goal>npm</goal>
+            </goals>
+            <configuration>
+              <arguments>run build</arguments>
+              <environmentVariables>
+                <APP_VERSION>${project.version}</APP_VERSION>
+              </environmentVariables>
+              <npmInheritsProxyConfigFromMaven>false</npmInheritsProxyConfigFromMaven>
+            </configuration>
+          </execution>
+          <execution>
+            <id>front test</id>
+            <phase>test</phase>
+            <goals>
+              <goal>npm</goal>
+            </goals>
+            <configuration>
+              <arguments>run test:coverage</arguments>
+              <npmInheritsProxyConfigFromMaven>false</npmInheritsProxyConfigFromMaven>
+            </configuration>
+          </execution>
+        </executions>
+        <configuration>
+          <installDirectory>${project.build.directory}</installDirectory>
         </configuration>
       </plugin>
     </plugins>
