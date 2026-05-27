@@ -141,3 +141,5 @@ src/test/resources/**/*.received.txt
 # Maven Wrapper
 !.mvn/wrapper/maven-wrapper.jar
 .tikui-cache
+# OAuth 2.0
+auth0.sh
