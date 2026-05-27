@@ -264,6 +264,24 @@
       <artifactId>spring-boot-starter-security-test</artifactId>
       <scope>test</scope>
     </dependency>
+    <dependency>
+      <groupId>io.jsonwebtoken</groupId>
+      <artifactId>jjwt-api</artifactId>
+      <version>${json-web-token.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>io.jsonwebtoken</groupId>
+      <artifactId>jjwt-impl</artifactId>
+      <version>${json-web-token.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>io.jsonwebtoken</groupId>
+      <artifactId>jjwt-jackson</artifactId>
+      <version>${json-web-token.version}</version>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
 
   <properties>
@@ -316,6 +334,7 @@
     <maven-antrun-plugin.version>3.2.0</maven-antrun-plugin.version>
     <htmx-webjars.version>2.0.8</htmx-webjars.version>
     <openapi-backwards-compat-maven-plugin.version>1.0.3</openapi-backwards-compat-maven-plugin.version>
+    <json-web-token.version>0.13.0</json-web-token.version>
   </properties>
   <profiles>
     <profile>

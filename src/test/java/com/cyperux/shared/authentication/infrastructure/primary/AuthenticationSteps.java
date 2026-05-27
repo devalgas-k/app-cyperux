@@ -1,0 +1,92 @@
+package com.cyperux.shared.authentication.infrastructure.primary;
+
+import static org.assertj.core.api.Assertions.*;
+
+import com.cyperux.shared.authentication.domain.Role;
+import com.cyperux.cucumber.CucumberAuthenticationConfiguration;
+import com.cyperux.cucumber.rest.CucumberRestClient;
+import io.cucumber.java.en.Given;
+import io.jsonwebtoken.Jwts;
+import java.time.Instant;
+import java.util.Collections;
+import java.util.Date;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.stream.Stream;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.client.ClientHttpRequestInterceptor;
+
+public class AuthenticationSteps {
+
+  private static final Map<String, User> users = new UsersBuilder().add("admin", Role.ADMIN).add("user", Role.USER).build();
+  private final CucumberRestClient restClient;
+
+  AuthenticationSteps(CucumberRestClient restClient) {
+    this.restClient = restClient;
+  }
+
+  @Given("I am logged in as {string}")
+  public void authenticateUser(String username) {
+    var userToAuthenticate = users.get(username);
+    assertThat(userToAuthenticate).as(unknownUserMessage(username)).isNotNull();
+    restClient.addRequestInterceptor(authenticateUserInterceptor(userToAuthenticate));
+  }
+
+  private static ClientHttpRequestInterceptor authenticateUserInterceptor(User userToAuthenticate) {
+    return (request, body, execution) -> {
+      request.getHeaders().set(HttpHeaders.AUTHORIZATION, "Bearer " + userToAuthenticate.token());
+
+      return execution.execute(request, body);
+    };
+  }
+
+  @Given("I am logged out")
+  public void logout() {
+    restClient.addRequestInterceptor(unauthenticateInterceptor());
+  }
+
+  private static ClientHttpRequestInterceptor unauthenticateInterceptor() {
+    return (request, body, execution) -> {
+      request.getHeaders().remove(HttpHeaders.AUTHORIZATION);
+
+      return execution.execute(request, body);
+    };
+  }
+
+  private String unknownUserMessage(String user) {
+    return "Trying to authenticate an unknown user: " + user;
+  }
+
+  private static final class UsersBuilder {
+
+    private Map<String, User> users = new ConcurrentHashMap<>();
+
+    public UsersBuilder add(String username, Role... roles) {
+      users.put(username, new User(username, roles));
+
+      return this;
+    }
+
+    public Map<String, User> build() {
+      return Collections.unmodifiableMap(users);
+    }
+  }
+
+  private static class User {
+
+    private final Map<String, Object> claims;
+
+    public User(String username, Role[] roles) {
+      claims = Map.of("preferred_username", username, "roles", Stream.of(roles).map(Role::key).toList());
+    }
+
+    private String token() {
+      return Jwts.builder()
+        .subject("authentication")
+        .signWith(CucumberAuthenticationConfiguration.JWT_KEY)
+        .claims(claims)
+        .expiration(Date.from(Instant.now().plusSeconds(300)))
+        .compact();
+    }
+  }
+}
