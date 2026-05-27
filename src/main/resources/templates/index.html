@@ -10,7 +10,30 @@
   </head>
   <body>
     <div layout:fragment="content">
-      <div>Welcome to your Spring Boot with Thymeleaf project!</div>
+      <main class="flex flex-col min-h-screen w-full justify-center">
+  <section
+    class="flex flex-col w-full py-16 md:py-24 border-2 border-dashed border-green-500"
+  >
+    <div
+      class="flex flex-col w-full max-w-7xl mx-auto px-4 md:px-8 xl:px-20 gap-8"
+    >
+      <div class="flex justify-center items-center gap-2">
+        <img
+          class="w-36 h-36"
+          th:src="@{/images/ThymeleafLogo.png}"
+          alt="Thymeleaf Logo"
+        />
+        <h1 class="text-6xl font-bold">Thymeleaf</h1>
+      </div>
+      <div class="flex justify-center">
+        <div class="text-lg">
+          Welcome to your Spring Boot with Thymeleaf project!
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
       <!-- seed4j-needle-thymeleaf-index-content -->
     </div>
     <th:block layout:fragment="script-content">

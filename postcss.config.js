@@ -1,6 +1,7 @@
 const postcssConfig = {
   plugins: [
     require('autoprefixer'),
+            ,require('tailwindcss')
     // seed4j-needle-thymeleaf-postcss-plugins
   ],
 };

@@ -1,14 +1,8 @@
-const { heroui } = require('@heroui/react');
-
+/** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: [
-    './src/main/webapp/index.html',
-    './src/main/webapp/**/*.{js,ts,jsx,tsx}',
-    './node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx}',
-  ],
+  content: ['./src/main/resources/templates/**/*.html'],
   theme: {
     extend: {},
   },
-  darkMode: 'class',
-  plugins: [heroui()],
-};
+  plugins: [],
+}
