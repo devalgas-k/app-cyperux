@@ -188,6 +188,11 @@
       <artifactId>webjars-locator-lite</artifactId>
     </dependency>
     <dependency>
+      <groupId>org.webjars.npm</groupId>
+      <artifactId>alpinejs</artifactId>
+      <version>${alpinejs-webjars.version}</version>
+    </dependency>
+    <dependency>
       <groupId>net.jqwik</groupId>
       <artifactId>jqwik</artifactId>
       <version>${jqwik.version}</version>
@@ -301,6 +306,7 @@
     <openapi-maven-plugin.version>0.0.28</openapi-maven-plugin.version>
     <cucumber.version>7.33.0</cucumber.version>
     <springdoc-openapi.version>3.0.0</springdoc-openapi.version>
+    <alpinejs-webjars.version>3.15.3</alpinejs-webjars.version>
   </properties>
   <profiles>
     <profile>
