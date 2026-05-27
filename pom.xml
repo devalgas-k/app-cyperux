@@ -307,6 +307,8 @@
     <cucumber.version>7.33.0</cucumber.version>
     <springdoc-openapi.version>3.0.0</springdoc-openapi.version>
     <alpinejs-webjars.version>3.15.3</alpinejs-webjars.version>
+    <checksum-maven-plugin.version>1.11</checksum-maven-plugin.version>
+    <maven-antrun-plugin.version>3.2.0</maven-antrun-plugin.version>
   </properties>
   <profiles>
     <profile>
@@ -872,6 +874,77 @@
       <plugin>
         <groupId>io.github.kbuntrock</groupId>
         <artifactId>openapi-maven-plugin</artifactId>
+      </plugin>
+      <plugin>
+        <groupId>net.nicoulaj.maven.plugins</groupId>
+        <artifactId>checksum-maven-plugin</artifactId>
+        <version>${checksum-maven-plugin.version}</version>
+        <executions>
+          <execution>
+            <id>create-pre-compiled-webapp-checksum</id>
+            <phase>generate-resources</phase>
+            <goals>
+              <goal>files</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>create-compiled-webapp-checksum</id>
+            <phase>compile</phase>
+            <goals>
+              <goal>files</goal>
+            </goals>
+            <configuration>
+              <csvSummaryFile>checksums.csv.old</csvSummaryFile>
+            </configuration>
+          </execution>
+        </executions>
+        <configuration>
+          <fileSets>
+            <fileSet>
+              <directory>${project.basedir}</directory>
+              <includes>
+                <include>src/main/webapp/**/*.*</include>
+                <include>target/classes/static/**/*.*</include>
+                <include>package-lock.json</include>
+                <include>package.json</include>
+                <include>tsconfig.json</include>
+              </includes>
+            </fileSet>
+          </fileSets>
+          <failOnError>false</failOnError>
+          <failIfNoFiles>false</failIfNoFiles>
+          <individualFiles>false</individualFiles>
+          <algorithms>
+            <algorithm>SHA-1</algorithm>
+          </algorithms>
+          <includeRelativePath>true</includeRelativePath>
+          <quiet>true</quiet>
+        </configuration>
+      </plugin>
+      <plugin>
+        <artifactId>maven-antrun-plugin</artifactId>
+        <version>${maven-antrun-plugin.version}</version>
+        <executions>
+          <execution>
+            <id>eval-frontend-checksum</id>
+            <phase>generate-resources</phase>
+            <goals>
+              <goal>run</goal>
+            </goals>
+            <configuration>
+              <target>
+                <condition else="false" property="skip.npm" value="true">
+                  <and>
+                    <available file="checksums.csv" filepath="${project.build.directory}" />
+                    <available file="checksums.csv.old" filepath="${project.build.directory}" />
+                    <filesmatch file2="${project.build.directory}/checksums.csv.old" file1="${project.build.directory}/checksums.csv" />
+                  </and>
+                </condition>
+              </target>
+              <exportAntProperties>true</exportAntProperties>
+            </configuration>
+          </execution>
+        </executions>
       </plugin>
     </plugins>
     <defaultGoal>spring-boot:run</defaultGoal>
