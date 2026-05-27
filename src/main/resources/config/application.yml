@@ -25,6 +25,11 @@ spring:
       pool:
         size: 2
       thread-name-prefix: cyperux-scheduling-
+  devtools:
+    livereload:
+      enabled: false
+    restart:
+      enabled: false
 application:
   logging:
     logstash:
