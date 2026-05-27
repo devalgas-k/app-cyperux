@@ -72,6 +72,12 @@
       <groupId>org.jmolecules</groupId>
       <artifactId>jmolecules-events</artifactId>
     </dependency>
+    <dependency>
+      <groupId>net.jqwik</groupId>
+      <artifactId>jqwik</artifactId>
+      <version>${jqwik.version}</version>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
 
   <properties>
@@ -97,6 +103,7 @@
     <jqassistant.version>2.8.0</jqassistant.version>
     <asciidoctor-maven-plugin.version>3.2.0</asciidoctor-maven-plugin.version>
     <jqassistant-asciidoctorj-extensions.version>1.1.0</jqassistant-asciidoctorj-extensions.version>
+    <jqwik.version>1.9.3</jqwik.version>
   </properties>
 
   <build>

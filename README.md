@@ -39,5 +39,6 @@ npm install
 - [Approval Testing](documentation/approval-testing.md)
 - [Package types](documentation/package-types.md)
 - [Assertions](documentation/assertions.md)
+- [Property Based Testing](documentation/property-based-testing.md)
 
 <!-- seed4j-needle-documentation -->

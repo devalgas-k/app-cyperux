@@ -136,3 +136,5 @@ Desktop.ini
 infinitest.filters
 # Approval Testing
 src/test/resources/**/*.received.txt
+# JQwik
+.jqwik-database
