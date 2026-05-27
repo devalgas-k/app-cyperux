@@ -61,6 +61,7 @@
   },
   "type": "module",
   "dependencies": {
+    "arch-unit-ts": "1.0.9",
     "react": "19.2.3",
     "react-dom": "19.2.3",
     "piqure": "2.1.2"
