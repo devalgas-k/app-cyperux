@@ -10,3 +10,18 @@ describe('Home tests', () => {
     expect(title).toBeTruthy();
   });
 });
+
+describe('Home I18next', () => {
+  it('should render with translation', () => {
+    vi.mock('react-i18next', () => ({
+      useTranslation: () => {
+        return {
+          t: vi.fn().mockImplementation(() => 'Internationalization enabled'),
+        };
+      },
+    }));
+    const { getAllByText } = render(<HomePage />);
+    const title = getAllByText('Internationalization enabled');
+    expect(title).toBeTruthy();
+  });
+});

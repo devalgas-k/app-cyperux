@@ -3,7 +3,11 @@ import './HomePage.css';
 import Seed4JLogo from '@assets/seed4j_logo-name.png';
 import ReactLogo from '@assets/ReactLogo.png';
 
+import { useTranslation } from 'react-i18next';
+
 function HomePage() {
+  const { t } = useTranslation();
+
   return (
     <div>
       <div id="app">
@@ -11,6 +15,8 @@ function HomePage() {
         <br />
         <img alt="Seed4J logo" width={200} height={200} src={Seed4JLogo} />
         <h1>React + TypeScript + Vite</h1>
+
+        <p>{t('home.translationEnabled')}</p>
         <p>
           Recommended IDE setup:&nbsp;<a href="https://code.visualstudio.com/" target="_blank" rel="noopener noreferrer">VSCode</a>
         </p>
