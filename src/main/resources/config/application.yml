@@ -1,0 +1,7 @@
+logging:
+  level:
+    com:
+      cyperux: INFO
+spring:
+  application:
+    name: cyperux
