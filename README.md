@@ -64,5 +64,6 @@ docker compose -f src/main/docker/keycloak.yml up -d
 - [rest-page](documentation/rest-page.md)
 - [Cucumber](documentation/cucumber.md)
 - [Thymeleaf](documentation/thymeleaf.md)
+- [Kipe authorization](documentation/kipe-authorization.md)
 
 <!-- seed4j-needle-documentation -->
