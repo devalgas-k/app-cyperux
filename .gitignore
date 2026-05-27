@@ -140,3 +140,4 @@ src/test/resources/**/*.received.txt
 .jqwik-database
 # Maven Wrapper
 !.mvn/wrapper/maven-wrapper.jar
+.tikui-cache

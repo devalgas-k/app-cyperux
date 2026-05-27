@@ -9,6 +9,8 @@
     "node": ">=24"
   },
   "scripts": {
+    "build:tikui": "tikui-core build",
+    "dev:tikui": "tikui-core serve",
     "e2e": "playwright test --ui --config src/test/webapp/e2e/playwright.config.ts",
     "e2e:headless": "playwright test --config src/test/webapp/e2e/playwright.config.ts",
     "test:component": "start-server-and-test dev http://localhost:9000 'playwright test --ui --config src/test/webapp/component/playwright.config.ts'",
@@ -31,8 +33,14 @@
     "prepare": "husky"
   },
   "devDependencies": {
-    "autoprefixer": "10.4.23",
+    "@prettier/plugin-pug": "3.4.2",
     "sass": "1.97.1",
+    "stylelint": "16.26.1",
+    "stylelint-config-concentric-order": "5.2.1",
+    "stylelint-config-standard-scss": "16.0.0",
+    "stylelint-order": "7.0.0",
+    "tikuidoc-tikui": "9.0.0",
+    "autoprefixer": "10.4.23",
     "@tailwindcss/vite": "4.1.18",
     "tailwindcss": "4.1.18",
     "@playwright/test": "1.57.0",
@@ -71,6 +79,7 @@
   },
   "type": "module",
   "dependencies": {
+    "@tikui/core": "7.0.0",
     "react-hook-form": "7.69.0",
     "axios": "1.13.2",
     "@heroui/react": "2.8.7",
