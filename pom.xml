@@ -174,6 +174,16 @@
       <artifactId>spring-boot-starter-oauth2-resource-server</artifactId>
     </dependency>
     <dependency>
+      <groupId>org.springdoc</groupId>
+      <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+      <version>${springdoc-openapi.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.springdoc</groupId>
+      <artifactId>springdoc-openapi-starter-webmvc-api</artifactId>
+      <version>${springdoc-openapi.version}</version>
+    </dependency>
+    <dependency>
       <groupId>net.jqwik</groupId>
       <artifactId>jqwik</artifactId>
       <version>${jqwik.version}</version>
@@ -286,6 +296,7 @@
     <git-commit-id-plugin.version>9.0.2</git-commit-id-plugin.version>
     <openapi-maven-plugin.version>0.0.28</openapi-maven-plugin.version>
     <cucumber.version>7.33.0</cucumber.version>
+    <springdoc-openapi.version>3.0.0</springdoc-openapi.version>
   </properties>
   <profiles>
     <profile>
