@@ -24,3 +24,10 @@ spring:
             issuer-uri: http://DO_NOT_CALL:9080/realms/cyperux
 server:
   port: 0
+springdoc:
+  oauth2:
+    authorization-url: http://localhost:9080/realms/cyperux/protocol/openid-connect/auth
+  swagger-ui:
+    oauth:
+      client-id: web_app
+      realm: cyperux

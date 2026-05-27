@@ -126,3 +126,8 @@ springdoc:
     operationsSorter: alpha
     tagsSorter: alpha
     tryItOutEnabled: true
+    oauth:
+      client-id: web_app
+      realm: cyperux
+  oauth2:
+    authorization-url: http://localhost:9080/realms/cyperux/protocol/openid-connect/auth
