@@ -133,3 +133,4 @@ Desktop.ini
 # Sonar
 ######################
 .scannerwork/
+infinitest.filters
