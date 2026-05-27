@@ -12,7 +12,7 @@ spring:
       poolName: Hikari
     password: ''
     type: com.zaxxer.hikari.HikariDataSource
-    url: jdbc:postgresql://localhost:5432/cyperux
+    url: jdbc:postgresql://localhost:5438/cyperux
     username: cyperux
   task:
     execution:
@@ -104,13 +104,13 @@ management:
       base-path: /management
       exposure:
         include:
-        - configprops
-        - env
-        - health
-        - info
-        - logfile
-        - loggers
-        - threaddump
+          - configprops
+          - env
+          - health
+          - info
+          - logfile
+          - loggers
+          - threaddump
   info:
     env:
       enabled: true
