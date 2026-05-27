@@ -163,7 +163,20 @@
     <testcontainers.version>2.0.3</testcontainers.version>
     <jqassistant-spring-plugin.version>2.4.0</jqassistant-spring-plugin.version>
     <logstash-logback-encoder.version>9.0</logstash-logback-encoder.version>
+    <maven-resources-plugin.version>3.4.0</maven-resources-plugin.version>
+    <spring.profiles.active></spring.profiles.active>
   </properties>
+  <profiles>
+    <profile>
+      <id>local</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <properties>
+        <spring.profiles.active>local</spring.profiles.active>
+      </properties>
+    </profile>
+  </profiles>
 
   <build>
     <resources>
@@ -406,6 +419,16 @@
           </executions>
           <configuration>
             <mainClass>com.cyperux.CyperuxApp</mainClass>
+          </configuration>
+        </plugin>
+        <plugin>
+          <artifactId>maven-resources-plugin</artifactId>
+          <version>${maven-resources-plugin.version}</version>
+          <configuration>
+            <useDefaultDelimiters>false</useDefaultDelimiters>
+            <delimiters>
+              <delimiter>@</delimiter>
+            </delimiters>
           </configuration>
         </plugin>
       </plugins>

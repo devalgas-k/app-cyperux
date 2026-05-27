@@ -30,6 +30,8 @@ spring:
       enabled: false
     restart:
       enabled: false
+  profiles:
+    active: '@spring.profiles.active@'
 application:
   logging:
     logstash:

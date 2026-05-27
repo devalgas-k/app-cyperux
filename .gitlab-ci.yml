@@ -21,5 +21,5 @@ stages:
 Test:run-tests:
   stage: test
   script:
-    - ./mvnw clean verify $MAVEN_CLI_OPTS
+    - ./mvnw clean verify -P'!local' $MAVEN_CLI_OPTS
   interruptible: true
