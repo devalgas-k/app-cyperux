@@ -9,6 +9,8 @@
     "node": ">=24"
   },
   "scripts": {
+    "e2e": "playwright test --ui --config src/test/webapp/e2e/playwright.config.ts",
+    "e2e:headless": "playwright test --config src/test/webapp/e2e/playwright.config.ts",
     "test:component": "start-server-and-test dev http://localhost:9000 'playwright test --ui --config src/test/webapp/component/playwright.config.ts'",
     "test:component:headless": "start-server-and-test dev http://localhost:9000 'playwright test --config src/test/webapp/component/playwright.config.ts'",
     "dev": "npm-run-all --parallel dev:*",
