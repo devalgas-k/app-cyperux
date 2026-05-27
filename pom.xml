@@ -141,6 +141,15 @@
       <artifactId>spring-boot-starter-actuator</artifactId>
     </dependency>
     <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-thymeleaf</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>nz.net.ultraq.thymeleaf</groupId>
+      <artifactId>thymeleaf-layout-dialect</artifactId>
+      <version>${thymeleaf-layout-dialect.version}</version>
+    </dependency>
+    <dependency>
       <groupId>net.jqwik</groupId>
       <artifactId>jqwik</artifactId>
       <version>${jqwik.version}</version>
@@ -208,6 +217,7 @@
     <reflections.version>0.10.2</reflections.version>
     <archunit-junit5.version>1.4.1</archunit-junit5.version>
     <jooq.version>3.20.10</jooq.version>
+    <thymeleaf-layout-dialect.version>3.4.0</thymeleaf-layout-dialect.version>
   </properties>
   <profiles>
     <profile>
