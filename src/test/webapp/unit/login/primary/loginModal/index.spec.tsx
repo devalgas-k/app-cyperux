@@ -1,0 +1,99 @@
+import { act, fireEvent, render } from '@testing-library/react';
+import axios from 'axios';
+import { describe, expect, it } from 'vitest';
+
+import { UserInfoContext } from '@/login/primary/loginForm';
+import LoginModal from '@/login/primary/loginModal';
+
+const setUsername = vi.fn();
+const setToken = vi.fn();
+
+const LoginModalRender = (open: boolean) =>
+  render(
+    <UserInfoContext.Provider value={{ setUsername, setToken }}>
+      <LoginModal open={open} onClose={vi.fn()} />
+    </UserInfoContext.Provider>,
+  );
+
+describe('loginModal', () => {
+  beforeEach(() => {
+    vi.restoreAllMocks();
+  });
+
+  it('should contain login title', () => {
+    const { getByText } = LoginModalRender(true);
+    const title = getByText('Connect');
+    expect(title).toBeTruthy();
+  });
+
+  it('should be closed', () => {
+    const { queryByText } = LoginModalRender(false);
+    const title = queryByText('Connect');
+    expect(title).toBeFalsy();
+  });
+
+  it('should contain username input', () => {
+    const { getByPlaceholderText } = LoginModalRender(true);
+    const username = getByPlaceholderText('Username');
+    expect(username).toBeTruthy();
+  });
+
+  it('should contain password input', async () => {
+    const { getByPlaceholderText, getByTestId } = LoginModalRender(true);
+    const username = getByPlaceholderText('Password');
+    await act(() => {
+      const displayPasswordButton = getByTestId('display-password');
+      fireEvent.click(displayPasswordButton);
+    });
+    expect(username).toBeTruthy();
+  });
+
+  it('should contain submit button', () => {
+    const { getByTestId } = LoginModalRender(true);
+    const submit = getByTestId('submit-button');
+    expect(submit).toBeTruthy();
+  });
+
+  it('should render the modal on login button click and close the modal on submit button click', async () => {
+    const { getByPlaceholderText, getByTestId } = LoginModalRender(true);
+    const spy = vi.spyOn(axios, 'post');
+    spy.mockImplementationOnce((): Promise<any> => Promise.resolve({ data: {} }));
+    await act(() => {
+      fireEvent.change(getByPlaceholderText('Username'), {
+        target: { value: 'admin' },
+      });
+      fireEvent.change(getByPlaceholderText('Password'), {
+        target: { value: 'admin' },
+      });
+      const submitButton = getByTestId('submit-button');
+      fireEvent.click(submitButton);
+    });
+    expect(spy).toHaveBeenCalledOnce();
+  });
+
+  it('should render the modal on login button click and close the modal on close button', async () => {
+    const { getByPlaceholderText, getByRole } = LoginModalRender(true);
+    const spy = vi.spyOn(axios, 'post');
+    spy.mockImplementationOnce((): Promise<any> => Promise.resolve({ data: {} }));
+    await act(() => {
+      fireEvent.change(getByPlaceholderText('Username'), {
+        target: { value: 'admin' },
+      });
+      fireEvent.change(getByPlaceholderText('Password'), {
+        target: { value: 'admin' },
+      });
+      const submitButton = getByRole('button', { name: 'Close' });
+      fireEvent.click(submitButton);
+    });
+    expect(spy).not.toHaveBeenCalled();
+  });
+
+  it('should contain error message when submit button is clicked with empty value', async () => {
+    const { getByTestId } = LoginModalRender(true);
+    await act(() => {
+      const submitButton = getByTestId('submit-button');
+      fireEvent.click(submitButton);
+    });
+    expect(getByTestId('error-message')).toBeTruthy();
+  });
+});

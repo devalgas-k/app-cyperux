@@ -5,6 +5,8 @@ import ReactLogo from '@assets/ReactLogo.png';
 
 import { useTranslation } from 'react-i18next';
 
+import LoginForm from '@/login/primary/loginForm';
+
 function HomePage() {
   const { t } = useTranslation();
 
@@ -34,6 +36,7 @@ function HomePage() {
         <p>
           Edit&nbsp;<code>src/main/webapp/app/common/primary/app/App.tsx</code> to test hot module replacement.
         </p>
+        <LoginForm />
       </div>
     </div>
   );
