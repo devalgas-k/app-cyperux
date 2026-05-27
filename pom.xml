@@ -193,6 +193,11 @@
       <version>${alpinejs-webjars.version}</version>
     </dependency>
     <dependency>
+      <groupId>org.webjars.npm</groupId>
+      <artifactId>htmx.org</artifactId>
+      <version>${htmx-webjars.version}</version>
+    </dependency>
+    <dependency>
       <groupId>net.jqwik</groupId>
       <artifactId>jqwik</artifactId>
       <version>${jqwik.version}</version>
@@ -309,6 +314,7 @@
     <alpinejs-webjars.version>3.15.3</alpinejs-webjars.version>
     <checksum-maven-plugin.version>1.11</checksum-maven-plugin.version>
     <maven-antrun-plugin.version>3.2.0</maven-antrun-plugin.version>
+    <htmx-webjars.version>2.0.8</htmx-webjars.version>
   </properties>
   <profiles>
     <profile>
