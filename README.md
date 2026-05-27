@@ -56,5 +56,6 @@ docker compose -f src/main/docker/postgresql.yml up -d
 - [Caffeine](documentation/caffeine.md)
 - [Application errors](documentation/application-errors.md)
 - [CORS configuration](documentation/cors-configuration.md)
+- [rest-page](documentation/rest-page.md)
 
 <!-- seed4j-needle-documentation -->
