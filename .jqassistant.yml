@@ -1,0 +1,15 @@
+jqassistant:
+  plugins:
+    - group-id: org.jqassistant.plugin
+      artifact-id: jqassistant-context-mapper-plugin
+      version: ${jqassistant-context-mapper-plugin.version}
+    # seed4j-needle-jqassistant-plugin
+
+  analyze:
+    concept:
+      # seed4j-needle-jqassistant-analyze-concept
+    groups:
+      # seed4j-needle-jqassistant-analyze-group
+    execute-applied-concepts: true
+    report:
+      continue-on-failure: true

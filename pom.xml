@@ -24,6 +24,11 @@
         <type>pom</type>
         <scope>import</scope>
       </dependency>
+      <dependency>
+        <groupId>org.jqassistant.plugin</groupId>
+        <artifactId>jqassistant-context-mapper-plugin</artifactId>
+        <version>${jqassistant-context-mapper-plugin.version}</version>
+      </dependency>
     </dependencies>
   </dependencyManagement>
   <dependencies>
@@ -88,6 +93,10 @@
     <jacoco.version>0.8.14</jacoco.version>
     <jib-maven-plugin.version>3.5.1</jib-maven-plugin.version>
     <jmolecules-bom.version>2025.0.2</jmolecules-bom.version>
+    <jqassistant-context-mapper-plugin.version>2.1.0-M2</jqassistant-context-mapper-plugin.version>
+    <jqassistant.version>2.8.0</jqassistant.version>
+    <asciidoctor-maven-plugin.version>3.2.0</asciidoctor-maven-plugin.version>
+    <jqassistant-asciidoctorj-extensions.version>1.1.0</jqassistant-asciidoctorj-extensions.version>
   </properties>
 
   <build>
@@ -234,6 +243,48 @@
             </execution>
           </executions>
         </plugin>
+        <plugin>
+          <groupId>com.buschmais.jqassistant</groupId>
+          <artifactId>jqassistant-maven-plugin</artifactId>
+          <version>${jqassistant.version}</version>
+          <executions>
+            <execution>
+              <id>default-cli</id>
+              <phase>verify</phase>
+              <goals>
+                <goal>scan</goal>
+                <goal>analyze</goal>
+              </goals>
+            </execution>
+          </executions>
+        </plugin>
+        <plugin>
+          <groupId>org.asciidoctor</groupId>
+          <artifactId>asciidoctor-maven-plugin</artifactId>
+          <version>${asciidoctor-maven-plugin.version}</version>
+          <executions>
+            <execution>
+              <id>html</id>
+              <phase>verify</phase>
+              <goals>
+                <goal>process-asciidoc</goal>
+              </goals>
+            </execution>
+          </executions>
+          <dependencies>
+            <dependency>
+              <groupId>org.jqassistant.tooling.asciidoctorj</groupId>
+              <artifactId>jqassistant-asciidoctorj-extensions</artifactId>
+              <version>${jqassistant-asciidoctorj-extensions.version}</version>
+            </dependency>
+          </dependencies>
+          <configuration>
+            <backend>html5</backend>
+            <attributes>
+              <jqassistant-report-path>${project.build.directory}/jqassistant/jqassistant-report.xml</jqassistant-report-path>
+            </attributes>
+          </configuration>
+        </plugin>
       </plugins>
     </pluginManagement>
     <plugins>
@@ -364,6 +415,14 @@
             </permissions>
           </extraDirectories>
         </configuration>
+      </plugin>
+      <plugin>
+        <groupId>com.buschmais.jqassistant</groupId>
+        <artifactId>jqassistant-maven-plugin</artifactId>
+      </plugin>
+      <plugin>
+        <groupId>org.asciidoctor</groupId>
+        <artifactId>asciidoctor-maven-plugin</artifactId>
       </plugin>
     </plugins>
   </build>
