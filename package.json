@@ -9,6 +9,8 @@
     "node": ">=24"
   },
   "scripts": {
+    "test:component": "start-server-and-test dev http://localhost:9000 'playwright test --ui --config src/test/webapp/component/playwright.config.ts'",
+    "test:component:headless": "start-server-and-test dev http://localhost:9000 'playwright test --config src/test/webapp/component/playwright.config.ts'",
     "dev": "npm-run-all --parallel dev:*",
     "dev:vite": "vite",
     "build": "npm-run-all build:*",
@@ -27,6 +29,8 @@
     "prepare": "husky"
   },
   "devDependencies": {
+    "@playwright/test": "1.57.0",
+    "start-server-and-test": "2.1.3",
     "@testing-library/dom": "10.4.1",
     "@testing-library/react": "16.3.1",
     "@types/node": "24.10.4",
