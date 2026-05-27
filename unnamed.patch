@@ -1,0 +1,392 @@
+Index: src/main/webapp/app/index.css
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/webapp/app/index.css b/src/main/webapp/app/index.css
+--- a/src/main/webapp/app/index.css	(revision 426fce6907bed0de483ec4815deccdd0b7050bd8)
++++ b/src/main/webapp/app/index.css	(date 1779888362237)
+@@ -1,11 +1,124 @@
+-@config '../../../../tailwind.config.js';
+-@import 'tailwindcss';
++@import "tailwindcss";
++
++@layer base {
++  :root {
++  --background: oklch(1 0 0);
++  --foreground: oklch(0.145 0 0);
++  --card: oklch(1 0 0);
++  --card-foreground: oklch(0.145 0 0);
++  --popover: oklch(1 0 0);
++  --popover-foreground: oklch(0.145 0 0);
++  --primary: oklch(0.205 0 0);
++  --primary-foreground: oklch(0.985 0 0);
++  --secondary: oklch(0.97 0 0);
++  --secondary-foreground: oklch(0.205 0 0);
++  --muted: oklch(0.97 0 0);
++  --muted-foreground: oklch(0.556 0 0);
++  --accent: oklch(0.97 0 0);
++  --accent-foreground: oklch(0.205 0 0);
++  --destructive: oklch(0.577 0.245 27.325);
++  --destructive-foreground: oklch(0.577 0.245 27.325);
++  --border: oklch(0.922 0 0);
++  --input: oklch(0.922 0 0);
++  --ring: oklch(0.708 0 0);
++  --chart-1: oklch(0.646 0.222 41.116);
++  --chart-2: oklch(0.6 0.118 184.704);
++  --chart-3: oklch(0.398 0.07 227.392);
++  --chart-4: oklch(0.828 0.189 84.429);
++  --chart-5: oklch(0.769 0.188 70.08);
++  --radius: 0.625rem;
++  --sidebar: oklch(0.985 0 0);
++  --sidebar-foreground: oklch(0.145 0 0);
++  --sidebar-primary: oklch(0.205 0 0);
++  --sidebar-primary-foreground: oklch(0.985 0 0);
++  --sidebar-accent: oklch(0.97 0 0);
++  --sidebar-accent-foreground: oklch(0.205 0 0);
++  --sidebar-border: oklch(0.922 0 0);
++  --sidebar-ring: oklch(0.708 0 0);
++}
+ 
+-body {
+-  margin: 0;
+-  font-family:
+-    -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+-    sans-serif;
+-  -webkit-font-smoothing: antialiased;
+-  -moz-osx-font-smoothing: grayscale;
++.dark {
++  --background: oklch(0.145 0 0);
++  --foreground: oklch(0.985 0 0);
++  --card: oklch(0.145 0 0);
++  --card-foreground: oklch(0.985 0 0);
++  --popover: oklch(0.145 0 0);
++  --popover-foreground: oklch(0.985 0 0);
++  --primary: oklch(0.985 0 0);
++  --primary-foreground: oklch(0.205 0 0);
++  --secondary: oklch(0.269 0 0);
++  --secondary-foreground: oklch(0.985 0 0);
++  --muted: oklch(0.269 0 0);
++  --muted-foreground: oklch(0.708 0 0);
++  --accent: oklch(0.269 0 0);
++  --accent-foreground: oklch(0.985 0 0);
++  --destructive: oklch(0.396 0.141 25.723);
++  --destructive-foreground: oklch(0.637 0.237 25.331);
++  --border: oklch(0.269 0 0);
++  --input: oklch(0.269 0 0);
++  --ring: oklch(0.439 0 0);
++  --chart-1: oklch(0.488 0.243 264.376);
++  --chart-2: oklch(0.696 0.17 162.48);
++  --chart-3: oklch(0.769 0.188 70.08);
++  --chart-4: oklch(0.627 0.265 303.9);
++  --chart-5: oklch(0.645 0.246 16.439);
++  --sidebar: oklch(0.205 0 0);
++  --sidebar-foreground: oklch(0.985 0 0);
++  --sidebar-primary: oklch(0.488 0.243 264.376);
++  --sidebar-primary-foreground: oklch(0.985 0 0);
++  --sidebar-accent: oklch(0.269 0 0);
++  --sidebar-accent-foreground: oklch(0.985 0 0);
++  --sidebar-border: oklch(0.269 0 0);
++  --sidebar-ring: oklch(0.439 0 0);
++}
++}
++
++@theme inline {
++  --font-sans: 'Geist', 'Geist Fallback';
++  --font-mono: 'Geist Mono', 'Geist Mono Fallback';
++  --color-background: var(--background);
++  --color-foreground: var(--foreground);
++  --color-card: var(--card);
++  --color-card-foreground: var(--card-foreground);
++  --color-popover: var(--popover);
++  --color-popover-foreground: var(--popover-foreground);
++  --color-primary: var(--primary);
++  --color-primary-foreground: var(--primary-foreground);
++  --color-secondary: var(--secondary);
++  --color-secondary-foreground: var(--secondary-foreground);
++  --color-muted: var(--muted);
++  --color-muted-foreground: var(--muted-foreground);
++  --color-accent: var(--accent);
++  --color-accent-foreground: var(--accent-foreground);
++  --color-destructive: var(--destructive);
++  --color-destructive-foreground: var(--destructive-foreground);
++  --color-border: var(--border);
++  --color-input: var(--input);
++  --color-ring: var(--ring);
++  --color-chart-1: var(--chart-1);
++  --color-chart-2: var(--chart-2);
++  --color-chart-3: var(--chart-3);
++  --color-chart-4: var(--chart-4);
++  --color-chart-5: var(--chart-5);
++  --radius-sm: calc(var(--radius) - 4px);
++  --radius-md: calc(var(--radius) - 2px);
++  --radius-lg: var(--radius);
++  --radius-xl: calc(var(--radius) + 4px);
++  --color-sidebar: var(--sidebar);
++  --color-sidebar-foreground: var(--sidebar-foreground);
++  --color-sidebar-primary: var(--sidebar-primary);
++  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
++  --color-sidebar-accent: var(--sidebar-accent);
++  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
++  --color-sidebar-border: var(--sidebar-border);
++  --color-sidebar-ring: var(--sidebar-ring);
++}
++
++@layer base {
++  * {
++    @apply border-border outline-ring/50;
++  }
++  body {
++    @apply bg-background text-foreground;
++  }
+ }
+Index: src/main/webapp/app/index.tsx
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/webapp/app/index.tsx b/src/main/webapp/app/index.tsx
+--- a/src/main/webapp/app/index.tsx	(revision 426fce6907bed0de483ec4815deccdd0b7050bd8)
++++ b/src/main/webapp/app/index.tsx	(date 1779889572739)
+@@ -1,7 +1,8 @@
+-import HomePage from '@/home/infrastructure/primary/HomePage';
+ import { HeroUIProvider } from '@heroui/react';
+ import React from 'react';
+ import { createRoot } from 'react-dom/client';
++import { RouterProvider } from 'react-router-dom';
++import { router } from './router';
+ import './index.css';
+ 
+ import './i18n';
+@@ -11,7 +12,7 @@
+ root.render(
+   <React.StrictMode>
+     <HeroUIProvider>
+-      <HomePage />
++      <RouterProvider router={router} />
+     </HeroUIProvider>
+   </React.StrictMode>,
+ );
+Index: src/main/webapp/index.html
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/webapp/index.html b/src/main/webapp/index.html
+--- a/src/main/webapp/index.html	(revision 426fce6907bed0de483ec4815deccdd0b7050bd8)
++++ b/src/main/webapp/index.html	(date 1779888307140)
+@@ -10,6 +10,9 @@
+   </head>
+   <body>
+     <div id="root"></div>
+-    <script type="module" src="./app/index.tsx"></script>
++    <script type="module" src="/app/index.tsx"></script>
++    <link rel="preconnect" href="https://fonts.googleapis.com" />
++    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
++    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=Geist+Mono:wght@100..900&display=swap" rel="stylesheet" />
+   </body>
+ </html>
+Index: package.json
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/package.json b/package.json
+--- a/package.json	(revision 426fce6907bed0de483ec4815deccdd0b7050bd8)
++++ b/package.json	(date 1779889947275)
+@@ -47,72 +47,123 @@
+     "prepare": "husky"
+   },
+   "devDependencies": {
+-    "tailwindcss": "4.1.18",
+     "@babel/cli": "7.28.3",
+-    "autoprefixer": "10.4.23",
++    "@eslint/js": "9.39.2",
++    "@playwright/test": "1.57.0",
++    "@prettier/plugin-pug": "3.4.2",
++    "@prettier/plugin-xml": "3.4.2",
++    "@tailwindcss/postcss": "4.3.0",
++    "@tailwindcss/vite": "4.3.0",
++    "@testing-library/dom": "10.4.1",
++    "@testing-library/react": "16.3.1",
++    "@tsconfig/vite-react": "7.0.2",
++    "@types/node": "24.10.4",
++    "@types/react": "19.2.7",
++    "@types/react-dom": "19.2.3",
++    "@typescript-eslint/eslint-plugin": "8.50.0",
++    "@typescript-eslint/parser": "8.50.0",
++    "@vitejs/plugin-react": "5.1.2",
++    "@vitest/coverage-istanbul": "4.0.16",
++    "autoprefixer": "10.5.0",
+     "browser-sync": "3.0.4",
+     "cssnano": "7.1.2",
++    "eslint": "9.39.2",
++    "eslint-config-prettier": "10.1.8",
++    "eslint-plugin-react": "7.37.5",
++    "globals": "16.5.0",
++    "husky": "9.1.7",
++    "jsdom": "27.3.0",
++    "lint-staged": "16.2.7",
+     "mkdirp": "3.0.1",
+     "npm-run-all2": "8.0.4",
+     "onchange": "7.1.0",
+     "path-exists-cli": "2.0.0",
+-    "postcss": "8.5.6",
++    "postcss": "8.5.15",
+     "postcss-cli": "11.0.1",
++    "prettier": "3.7.4",
++    "prettier-plugin-gherkin": "3.1.3",
++    "prettier-plugin-java": "2.7.7",
++    "prettier-plugin-organize-imports": "4.3.0",
++    "prettier-plugin-packagejson": "2.5.20",
+     "recursive-copy-cli": "1.0.20",
+-    "@prettier/plugin-pug": "3.4.2",
+     "sass": "1.97.1",
++    "start-server-and-test": "2.1.3",
+     "stylelint": "16.26.1",
+     "stylelint-config-concentric-order": "5.2.1",
+     "stylelint-config-standard-scss": "16.0.0",
+     "stylelint-order": "7.0.0",
++    "tailwindcss": "4.3.0",
+     "tikuidoc-tikui": "9.0.0",
+-    "@tailwindcss/vite": "4.1.18",
+-    "@playwright/test": "1.57.0",
+-    "start-server-and-test": "2.1.3",
+-    "@testing-library/dom": "10.4.1",
+-    "@testing-library/react": "16.3.1",
+-    "@types/node": "24.10.4",
+-    "@types/react": "19.2.7",
+-    "@types/react-dom": "19.2.3",
+-    "@tsconfig/vite-react": "7.0.2",
+-    "@vitejs/plugin-react": "5.1.2",
+-    "eslint-plugin-react": "7.37.5",
+-    "jsdom": "27.3.0",
+-    "vite": "7.3.0",
+     "typescript": "5.9.3",
+-    "@typescript-eslint/eslint-plugin": "8.50.0",
+-    "@typescript-eslint/parser": "8.50.0",
+-    "@vitest/coverage-istanbul": "4.0.16",
+-    "eslint": "9.39.2",
+-    "eslint-config-prettier": "10.1.8",
+-    "@eslint/js": "9.39.2",
+-    "globals": "16.5.0",
+     "typescript-eslint": "8.50.0",
++    "vite": "7.3.0",
+     "vite-tsconfig-paths": "6.0.3",
+     "vitest": "4.0.16",
+-    "vitest-sonar-reporter": "3.0.0",
+-    "@prettier/plugin-xml": "3.4.2",
+-    "prettier": "3.7.4",
+-    "prettier-plugin-gherkin": "3.1.3",
+-    "prettier-plugin-java": "2.7.7",
+-    "prettier-plugin-organize-imports": "4.3.0",
+-    "prettier-plugin-packagejson": "2.5.20",
+-    "husky": "9.1.7",
+-    "lint-staged": "16.2.7"
++    "vitest-sonar-reporter": "3.0.0"
+   },
+   "type": "module",
+   "dependencies": {
++    "@heroui/react": "2.8.7",
++    "@radix-ui/react-accordion": "1.2.12",
++    "@radix-ui/react-alert-dialog": "1.1.15",
++    "@radix-ui/react-aspect-ratio": "1.1.8",
++    "@radix-ui/react-avatar": "1.1.11",
++    "@radix-ui/react-checkbox": "1.3.3",
++    "@radix-ui/react-collapsible": "1.1.12",
++    "@radix-ui/react-context-menu": "2.2.16",
++    "@radix-ui/react-dialog": "1.1.15",
++    "@radix-ui/react-dropdown-menu": "2.1.16",
++    "@radix-ui/react-hover-card": "1.1.15",
++    "@radix-ui/react-label": "2.1.8",
++    "@radix-ui/react-menubar": "1.1.16",
++    "@radix-ui/react-navigation-menu": "1.2.14",
++    "@radix-ui/react-popover": "1.1.15",
++    "@radix-ui/react-progress": "1.1.8",
++    "@radix-ui/react-radio-group": "1.3.8",
++    "@radix-ui/react-scroll-area": "1.2.10",
++    "@radix-ui/react-select": "2.2.6",
++    "@radix-ui/react-separator": "1.1.8",
++    "@radix-ui/react-slider": "1.3.6",
++    "@radix-ui/react-slot": "1.2.4",
++    "@radix-ui/react-switch": "1.2.6",
++    "@radix-ui/react-tabs": "1.1.13",
++    "@radix-ui/react-toast": "1.2.15",
++    "@radix-ui/react-toggle": "1.1.10",
++    "@radix-ui/react-toggle-group": "1.1.11",
++    "@radix-ui/react-tooltip": "1.2.8",
++    "@react-three/drei": "10.7.7",
++    "@react-three/fiber": "9.6.1",
+     "@tikui/core": "7.0.0",
+-    "react-hook-form": "7.69.0",
++    "arch-unit-ts": "1.0.9",
+     "axios": "1.13.2",
+-    "@heroui/react": "2.8.7",
++    "class-variance-authority": "0.7.1",
++    "clsx": "2.1.1",
++    "cmdk": "1.1.1",
++    "date-fns": "4.3.0",
++    "embla-carousel-react": "8.6.0",
++    "framer-motion": "12.40.0",
+     "i18next": "25.7.3",
+     "i18next-browser-languagedetector": "8.2.0",
+     "i18next-http-backend": "3.0.2",
+-    "react-i18next": "16.5.0",
+-    "arch-unit-ts": "1.0.9",
++    "input-otp": "1.4.2",
++    "leaflet": "1.9.4",
++    "lucide-react": "1.16.0",
++    "mapbox-gl": "3.24.0",
++    "next-themes": "0.4.6",
++    "piqure": "2.1.2",
+     "react": "19.2.3",
++    "react-day-picker": "10.0.1",
+     "react-dom": "19.2.3",
+-    "piqure": "2.1.2"
++    "react-hook-form": "7.69.0",
++    "react-i18next": "16.5.0",
++    "react-leaflet": "5.0.0",
++    "react-resizable-panels": "2.1.9",
++    "react-router-dom": "7.15.1",
++    "recharts": "3.8.1",
++    "sonner": "2.0.7",
++    "tailwind-merge": "3.6.0",
++    "three": "0.184.0",
++    "tw-animate-css": "1.4.0",
++    "vaul": "1.1.2"
+   }
+ }
+Index: postcss.config.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/postcss.config.js b/postcss.config.js
+--- a/postcss.config.js	(revision 426fce6907bed0de483ec4815deccdd0b7050bd8)
++++ b/postcss.config.js	(date 1779888168199)
+@@ -1,20 +1,6 @@
+-const postcssConfig = {
+-  plugins: [
+-    require('autoprefixer'),
+-            ,require('tailwindcss')
+-    // seed4j-needle-thymeleaf-postcss-plugins
+-  ],
+-};
+-
+-// If we are in production mode, then add cssnano
+-if (process.env.NODE_ENV === 'production') {
+-  postcssConfig.plugins.push(
+-    require('cssnano')({
+-      // use the safe preset so that it doesn't
+-      // mutate or remove code from our css
+-      preset: 'default',
+-    }),
+-  );
++export default {
++  plugins: {
++    '@tailwindcss/postcss': {},
++    autoprefixer: {},
++  },
+ }
+-
+-module.exports = postcssConfig;
