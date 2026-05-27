@@ -36,5 +36,6 @@ npm install
 
 - [Hexagonal architecture](documentation/hexagonal-architecture.md)
 - [Front hexagonal architecture](documentation/front-hexagonal-architecture.md)
+- [Approval Testing](documentation/approval-testing.md)
 
 <!-- seed4j-needle-documentation -->
