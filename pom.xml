@@ -235,6 +235,7 @@
     <npm.version>11.7.0</npm.version>
     <node.version>v24.12.0</node.version>
     <git-commit-id-plugin.version>9.0.2</git-commit-id-plugin.version>
+    <openapi-maven-plugin.version>0.0.28</openapi-maven-plugin.version>
   </properties>
   <profiles>
     <profile>
@@ -525,6 +526,40 @@
             <verbose>false</verbose>
           </configuration>
         </plugin>
+        <plugin>
+          <groupId>io.github.kbuntrock</groupId>
+          <artifactId>openapi-maven-plugin</artifactId>
+          <version>${openapi-maven-plugin.version}</version>
+          <executions>
+            <execution>
+              <id>generate-openapi-contract</id>
+              <goals>
+                <goal>documentation</goal>
+              </goals>
+            </execution>
+          </executions>
+          <configuration>
+            <apiConfiguration>
+              <library>SPRING_MVC</library>
+            </apiConfiguration>
+            <apis>
+              <api>
+                <filename>openapi-contract.yml</filename>
+                <locations>
+                  <location>com.cyperux</location>
+                </locations>
+                <tag>
+                  <substitutions>
+                    <sub>
+                      <regex>Resource$</regex>
+                      <substitute />
+                    </sub>
+                  </substitutions>
+                </tag>
+              </api>
+            </apis>
+          </configuration>
+        </plugin>
       </plugins>
     </pluginManagement>
     <plugins>
@@ -762,6 +797,10 @@
       <plugin>
         <groupId>io.github.git-commit-id</groupId>
         <artifactId>git-commit-id-maven-plugin</artifactId>
+      </plugin>
+      <plugin>
+        <groupId>io.github.kbuntrock</groupId>
+        <artifactId>openapi-maven-plugin</artifactId>
       </plugin>
     </plugins>
     <defaultGoal>spring-boot:run</defaultGoal>
