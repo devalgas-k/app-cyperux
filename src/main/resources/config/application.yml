@@ -14,6 +14,17 @@ spring:
     type: com.zaxxer.hikari.HikariDataSource
     url: jdbc:postgresql://localhost:5432/cyperux
     username: cyperux
+  task:
+    execution:
+      pool:
+        keep-alive: 10s
+        max-size: 16
+        queue-capacity: 100
+      thread-name-prefix: cyperux-task-
+    scheduling:
+      pool:
+        size: 2
+      thread-name-prefix: cyperux-scheduling-
 application:
   logging:
     logstash:
