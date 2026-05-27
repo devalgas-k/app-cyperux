@@ -1,0 +1,18 @@
+{
+  "module" : "liquibase",
+  "date" : "2026-05-27T09:23:39.753605Z",
+  "properties" : {
+    "packageName" : "com.cyperux",
+    "projectName" : "Cyperux",
+    "baseName" : "cyperux",
+    "keycloakClientScopeName" : "cyperux",
+    "keycloakRealmName" : "cyperux",
+    "nodePackageManager" : "npm",
+    "serverPort" : 8080,
+    "endOfLine" : "lf",
+    "indentSize" : 2,
+    "springConfigurationFormat" : "yaml",
+    "auth0Domain" : "dev-123456.us.auth0.com",
+    "auth0ClientId" : "0oab8eb55Kb9jdMIr5d6"
+  }
+}

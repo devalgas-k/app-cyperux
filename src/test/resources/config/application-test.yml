@@ -13,3 +13,5 @@ spring:
   docker:
     compose:
       enabled: false
+  liquibase:
+    contexts: test
