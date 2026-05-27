@@ -58,6 +58,8 @@ spring:
           in_clause_parameter_padding: true
   liquibase:
     change-log: classpath:config/liquibase/master.xml
+  jackson:
+    default-property-inclusion: non_absent
 application:
   logging:
     logstash:
@@ -95,3 +97,5 @@ management:
         - logfile
         - loggers
         - threaddump
+server:
+  port: 8080
