@@ -117,6 +117,8 @@
     <modernizer-maven-plugin.version>3.2.0</modernizer-maven-plugin.version>
     <jqassistant-jmolecules-plugin.version>2.1.0-M4</jqassistant-jmolecules-plugin.version>
     <commons-lang3.version>3.20.0</commons-lang3.version>
+    <properties-maven-plugin.version>1.2.1</properties-maven-plugin.version>
+    <sonar-maven-plugin.version>5.5.0.6356</sonar-maven-plugin.version>
   </properties>
 
   <build>
@@ -323,6 +325,30 @@
             <failOnViolations>true</failOnViolations>
           </configuration>
         </plugin>
+        <plugin>
+          <groupId>org.codehaus.mojo</groupId>
+          <artifactId>properties-maven-plugin</artifactId>
+          <version>${properties-maven-plugin.version}</version>
+          <executions>
+            <execution>
+              <id>default-cli</id>
+              <phase>initialize</phase>
+              <goals>
+                <goal>read-project-properties</goal>
+              </goals>
+              <configuration>
+                <files>
+                  <file>sonar-project.properties</file>
+                </files>
+              </configuration>
+            </execution>
+          </executions>
+        </plugin>
+        <plugin>
+          <groupId>org.sonarsource.scanner.maven</groupId>
+          <artifactId>sonar-maven-plugin</artifactId>
+          <version>${sonar-maven-plugin.version}</version>
+        </plugin>
       </plugins>
     </pluginManagement>
     <plugins>
@@ -465,6 +491,10 @@
       <plugin>
         <groupId>org.gaul</groupId>
         <artifactId>modernizer-maven-plugin</artifactId>
+      </plugin>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>properties-maven-plugin</artifactId>
       </plugin>
     </plugins>
   </build>
