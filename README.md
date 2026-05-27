@@ -63,5 +63,6 @@ docker compose -f src/main/docker/keycloak.yml up -d
 - [CORS configuration](documentation/cors-configuration.md)
 - [rest-page](documentation/rest-page.md)
 - [Cucumber](documentation/cucumber.md)
+- [Thymeleaf](documentation/thymeleaf.md)
 
 <!-- seed4j-needle-documentation -->
