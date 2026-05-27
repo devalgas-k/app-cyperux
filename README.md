@@ -33,6 +33,10 @@ npm install
 ./mvnw
 ```
 
+```bash
+docker compose -f src/main/docker/postgresql.yml up -d
+```
+
 
 <!-- seed4j-needle-startupCommand -->
 
@@ -45,5 +49,6 @@ npm install
 - [Assertions](documentation/assertions.md)
 - [Property Based Testing](documentation/property-based-testing.md)
 - [sonar](documentation/sonar.md)
+- [PostgreSQL](documentation/postgresql.md)
 
 <!-- seed4j-needle-documentation -->
