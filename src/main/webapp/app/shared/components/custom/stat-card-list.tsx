@@ -14,7 +14,9 @@ export function StatCardList({ children, className }: StatCardListProps) {
     <div 
       className={cn(
         "flex gap-4 pb-4 pt-4 px-1 -mt-4 -mx-1",
-        isScrollable ? "overflow-x-hidden hover:overflow-x-auto snap-x scroll-smooth" : "flex-wrap",
+        isScrollable 
+          ? "overflow-x-auto snap-x scroll-smooth [&::-webkit-scrollbar]:h-1.5 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:bg-border [&::-webkit-scrollbar-thumb]:rounded-full hover:[&::-webkit-scrollbar-thumb]:bg-muted-foreground/30" 
+          : "flex-wrap",
         className
       )}
     >
