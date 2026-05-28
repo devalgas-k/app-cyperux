@@ -45,7 +45,7 @@
     "prettier:check": "prettier --check .",
     "prettier:format": "prettier --write .",
     "prepare": "husky",
-    "lint-staged": "lint-staged --allow-empty"
+    "lint-staged": "lint-staged"
   },
   "devDependencies": {
     "@babel/cli": "7.28.3",
