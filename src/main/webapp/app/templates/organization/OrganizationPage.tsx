@@ -22,7 +22,6 @@ import {
   Activity,
   Clock,
   CheckCircle2,
-  XCircle,
   UserPlus,
   FileCheck,
   Cog,
@@ -41,7 +40,6 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/shared/components/ui
 import { Separator } from "@/shared/components/ui/separator"
 import { ScrollArea } from "@/shared/components/ui/scroll-area"
 import { Progress } from "@/shared/components/ui/progress"
-import { InteractiveStatCard } from "@/shared/components/custom/interactive-stat-card"
 import { toast } from "sonner"
 import { Link } from "react-router-dom"
 import { cn } from "@/shared/utils"
@@ -340,7 +338,7 @@ export default function OrganizationPage() {
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-4">
-                    {orgStructure.map((dept, idx) => (
+                    {orgStructure.map((dept) => (
                       <div key={dept.name} className="rounded-lg border p-4">
                         <div className="flex items-center justify-between mb-3">
                           <div className="flex items-center gap-3">
