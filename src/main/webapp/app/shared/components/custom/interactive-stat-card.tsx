@@ -10,7 +10,7 @@ interface InteractiveStatCardProps {
   icon: LucideIcon
   onClick?: () => void
   isActive?: boolean
-  variant?: "default" | "success" | "warning" | "danger" | "info"
+  variant?: "default" | "success" | "warning" | "danger" | "info" | "purple"
   description?: string
   trend?: {
     value: number
@@ -48,6 +48,12 @@ const variantStyles = {
     valueColor: "text-blue-500",
     hoverBorder: "hover:border-blue-500/50",
     active: "ring-2 ring-blue-500 ring-offset-2 ring-offset-background",
+  },
+  purple: {
+    iconColor: "text-[#593196]",
+    valueColor: "text-[#593196]",
+    hoverBorder: "hover:border-[#593196]/50",
+    active: "ring-2 ring-[#593196] ring-offset-2 ring-offset-background",
   },
 }
 

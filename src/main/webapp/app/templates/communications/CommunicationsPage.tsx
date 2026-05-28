@@ -34,6 +34,8 @@ import {
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/shared/components/ui/card"
 import { Button } from "@/shared/components/ui/button"
 import { Badge } from "@/shared/components/ui/badge"
+import { StatCardList } from "@/shared/components/custom/stat-card-list"
+import { InteractiveStatCard } from "@/shared/components/custom/interactive-stat-card"
 import { Input } from "@/shared/components/ui/input"
 import { Textarea } from "@/shared/components/ui/textarea"
 import {
@@ -346,78 +348,43 @@ export default function CommunicationsPage() {
       </div>
 
       {/* Stats Cards - Dashboard */}
-      <div className="grid gap-4 md:grid-cols-5">
-        <Card>
-          <CardContent className="pt-6">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm text-muted-foreground">Taux d&apos;Ouverture</p>
-                <p className="text-2xl font-bold">{avgOpenRate}%</p>
-                <p className="text-xs text-emerald-400">+3% vs mois dernier</p>
-              </div>
-              <div className="flex h-12 w-12 items-center justify-center rounded-full bg-emerald-500/20">
-                <Eye className="h-6 w-6 text-emerald-400" />
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardContent className="pt-6">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm text-muted-foreground">Taux de Clics</p>
-                <p className="text-2xl font-bold">{avgClickRate}%</p>
-                <p className="text-xs text-emerald-400">+5% vs mois dernier</p>
-              </div>
-              <div className="flex h-12 w-12 items-center justify-center rounded-full bg-blue-500/20">
-                <MousePointerClick className="h-6 w-6 text-blue-400" />
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardContent className="pt-6">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm text-muted-foreground">Portee (Reach)</p>
-                <p className="text-2xl font-bold">1.2k</p>
-                <p className="text-xs text-muted-foreground">utilisateurs atteints</p>
-              </div>
-              <div className="flex h-12 w-12 items-center justify-center rounded-full bg-purple-500/20">
-                <Users className="h-6 w-6 text-purple-400" />
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardContent className="pt-6">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm text-muted-foreground">Emails</p>
-                <p className="text-2xl font-bold">18</p>
-                <p className="text-xs text-muted-foreground">ce mois</p>
-              </div>
-              <div className="flex h-12 w-12 items-center justify-center rounded-full bg-blue-500/20">
-                <Mail className="h-6 w-6 text-blue-400" />
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardContent className="pt-6">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm text-muted-foreground">SMS/WhatsApp</p>
-                <p className="text-2xl font-bold">12</p>
-                <p className="text-xs text-muted-foreground">ce mois</p>
-              </div>
-              <div className="flex h-12 w-12 items-center justify-center rounded-full bg-emerald-500/20">
-                <MessageSquare className="h-6 w-6 text-emerald-400" />
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-      </div>
+      <StatCardList>
+        <InteractiveStatCard
+          label="Taux d'Ouverture"
+          value={`${avgOpenRate}%`}
+          icon={Eye}
+          variant="success"
+          description="+3% vs mois dernier"
+        />
+        <InteractiveStatCard
+          label="Taux de Clics"
+          value={`${avgClickRate}%`}
+          icon={MousePointerClick}
+          variant="info"
+          description="+5% vs mois dernier"
+        />
+        <InteractiveStatCard
+          label="Portée (Reach)"
+          value="1.2k"
+          icon={Users}
+          variant="purple"
+          description="utilisateurs atteints"
+        />
+        <InteractiveStatCard
+          label="Emails"
+          value="18"
+          icon={Mail}
+          variant="info"
+          description="ce mois"
+        />
+        <InteractiveStatCard
+          label="SMS/WhatsApp"
+          value="12"
+          icon={MessageSquare}
+          variant="success"
+          description="ce mois"
+        />
+      </StatCardList>
 
       {/* Tabs */}
       <Tabs defaultValue="campaigns">

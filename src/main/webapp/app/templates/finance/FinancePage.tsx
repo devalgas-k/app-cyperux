@@ -14,6 +14,8 @@ import {
 } from "@/shared/components/ui/select"
 // import { useLanguage } from "@/lib/i18n"
 import { toast } from "sonner"
+import { StatCardList } from "@/shared/components/custom/stat-card-list"
+import { InteractiveStatCard } from "@/shared/components/custom/interactive-stat-card"
 import { cn } from "@/shared/utils"
 import {
   Area,
@@ -118,85 +120,43 @@ export default function FinancePage() {
       )}
 
       {/* Key EVM Metrics - Interactive */}
-      <div className="grid gap-4 md:grid-cols-4">
-        <Card 
-          className={cn(
-            "bg-card border-chart-2/50 cursor-pointer transition-all hover:scale-[1.02] hover:shadow-lg",
-            activeFilter === "on-track" && "ring-2 ring-chart-2 ring-offset-2 ring-offset-background"
-          )}
+      <StatCardList>
+        <InteractiveStatCard
+          label="CPI"
+          value="1.08"
+          icon={TrendingUp}
+          variant="success"
+          description="Cost Performance Index"
+          isActive={activeFilter === "on-track"}
           onClick={() => handleStatClick("on-track", "Budget maitrise (CPI > 1)")}
-        >
-          <CardContent className="p-6">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm text-muted-foreground">CPI</p>
-                <p className="text-3xl font-bold text-chart-2">1.08</p>
-                <p className="text-xs text-muted-foreground mt-1">Cost Performance Index</p>
-              </div>
-              <div className="flex h-12 w-12 items-center justify-center rounded-full bg-chart-2/20">
-                <TrendingUp className="h-6 w-6 text-chart-2" />
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-        <Card 
-          className={cn(
-            "bg-card border-chart-3/50 cursor-pointer transition-all hover:scale-[1.02] hover:shadow-lg",
-            activeFilter === "at-risk" && "ring-2 ring-chart-3 ring-offset-2 ring-offset-background"
-          )}
+        />
+        <InteractiveStatCard
+          label="SPI"
+          value="0.94"
+          icon={TrendingDown}
+          variant="warning"
+          description="Schedule Performance Index"
+          isActive={activeFilter === "at-risk"}
           onClick={() => handleStatClick("at-risk", "Planning a risque (SPI < 1)")}
-        >
-          <CardContent className="p-6">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm text-muted-foreground">SPI</p>
-                <p className="text-3xl font-bold text-chart-3">0.94</p>
-                <p className="text-xs text-muted-foreground mt-1">Schedule Performance Index</p>
-              </div>
-              <div className="flex h-12 w-12 items-center justify-center rounded-full bg-chart-3/20">
-                <TrendingDown className="h-6 w-6 text-chart-3" />
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-        <Card 
-          className="bg-card border-chart-2/50 cursor-pointer transition-all hover:scale-[1.02] hover:shadow-lg"
+        />
+        <InteractiveStatCard
+          label="CV"
+          value="+45k€"
+          icon={DollarSign}
+          variant="success"
+          description={t("costVariance")}
           onClick={() => toast.info("Cost Variance: Economie de 45k€ par rapport au budget prevu")}
-        >
-          <CardContent className="p-6">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm text-muted-foreground">CV</p>
-                <p className="text-3xl font-bold text-chart-2">+45k€</p>
-                <p className="text-xs text-muted-foreground mt-1">{t("costVariance")}</p>
-              </div>
-              <div className="flex h-12 w-12 items-center justify-center rounded-full bg-chart-2/20">
-                <DollarSign className="h-6 w-6 text-chart-2" />
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-        <Card 
-          className={cn(
-            "bg-card border-destructive/50 cursor-pointer transition-all hover:scale-[1.02] hover:shadow-lg",
-            activeFilter === "over-budget" && "ring-2 ring-destructive ring-offset-2 ring-offset-background"
-          )}
+        />
+        <InteractiveStatCard
+          label="SV"
+          value="-120k€"
+          icon={AlertTriangle}
+          variant="danger"
+          description="Schedule Variance"
+          isActive={activeFilter === "over-budget"}
           onClick={() => handleStatClick("over-budget", "Retard planning (-120k€)")}
-        >
-          <CardContent className="p-6">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm text-muted-foreground">SV</p>
-                <p className="text-3xl font-bold text-destructive">-120k€</p>
-                <p className="text-xs text-muted-foreground mt-1">Schedule Variance</p>
-              </div>
-              <div className="flex h-12 w-12 items-center justify-center rounded-full bg-destructive/20">
-                <AlertTriangle className="h-6 w-6 text-destructive" />
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-      </div>
+        />
+      </StatCardList>
 
       {/* S-Curve Chart */}
       <Card className="bg-card">

@@ -29,6 +29,8 @@ import {
 } from "lucide-react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/shared/components/ui/card"
 import { Badge } from "@/shared/components/ui/badge"
+import { StatCardList } from "@/shared/components/custom/stat-card-list"
+import { InteractiveStatCard } from "@/shared/components/custom/interactive-stat-card"
 import { Button } from "@/shared/components/ui/button"
 import { Input } from "@/shared/components/ui/input"
 import { Progress } from "@/shared/components/ui/progress"
@@ -432,59 +434,36 @@ export default function WasteRegisterPage() {
         </Card>
 
         {/* KPI Cards */}
-        <div className="grid gap-4 md:grid-cols-4">
-          <Card>
-            <CardContent className="p-4">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-sm text-muted-foreground">Total évacué</p>
-                  <p className="text-3xl font-bold">{totalWeight}t</p>
-                  <p className="text-xs text-muted-foreground">Ce mois</p>
-                </div>
-                <Trash2 className="h-8 w-8 text-muted-foreground" />
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card className="border-amber-500/20 bg-amber-500/5">
-            <CardContent className="p-4">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-sm text-muted-foreground">Déchets dangereux</p>
-                  <p className="text-3xl font-bold text-amber-400">10t</p>
-                  <p className="text-xs text-amber-400">2 bordereaux actifs</p>
-                </div>
-                <AlertTriangle className="h-8 w-8 text-amber-400" />
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card className="border-blue-500/20 bg-blue-500/5">
-            <CardContent className="p-4">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-sm text-muted-foreground">Certificats reçus</p>
-                  <p className="text-3xl font-bold text-blue-400">5/7</p>
-                  <p className="text-xs text-blue-400">2 en attente</p>
-                </div>
-                <FileCheck className="h-8 w-8 text-blue-400" />
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card className="border-[#593196]/20 bg-[#593196]/5">
-            <CardContent className="p-4">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-sm text-muted-foreground">CO2 évité</p>
-                  <p className="text-3xl font-bold text-[#593196]">12.4t</p>
-                  <p className="text-xs text-[#593196]">Par valorisation</p>
-                </div>
-                <Leaf className="h-8 w-8 text-[#593196]" />
-              </div>
-            </CardContent>
-          </Card>
-        </div>
+        <StatCardList>
+          <InteractiveStatCard
+            label="Total évacué"
+            value={`${totalWeight}t`}
+            icon={Trash2}
+            variant="default"
+            description="Ce mois"
+          />
+          <InteractiveStatCard
+            label="Déchets dangereux"
+            value="10t"
+            icon={AlertTriangle}
+            variant="warning"
+            description="2 bordereaux actifs"
+          />
+          <InteractiveStatCard
+            label="Certificats reçus"
+            value="5/7"
+            icon={FileCheck}
+            variant="info"
+            description="2 en attente"
+          />
+          <InteractiveStatCard
+            label="CO2 évité"
+            value="12.4t"
+            icon={Leaf}
+            variant="purple"
+            description="Par valorisation"
+          />
+        </StatCardList>
 
         {/* BSD Table */}
         <Card>
