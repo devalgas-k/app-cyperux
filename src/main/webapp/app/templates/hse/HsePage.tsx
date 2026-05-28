@@ -22,6 +22,7 @@ import {
 } from "@/shared/components/ui/dialog"
 // // import { useLanguage } from "@/lib/i18n"
 import { toast } from "sonner"
+import { StatCardList } from "@/shared/components/custom/stat-card-list"
 import { InteractiveStatCard } from "@/shared/components/custom/interactive-stat-card"
 import { DataTablePaginated, type FilterConfig, type ColumnConfig } from "@/shared/components/custom/data-table-paginated"
 
@@ -252,20 +253,13 @@ export default function HsePage() {
       </div>
 
       {/* Interactive Stats */}
-      <div className="grid gap-4 md:grid-cols-5">
-        <Card className="bg-card border-chart-2/50">
-          <CardContent className="p-6">
-            <div className="flex items-center gap-4">
-              <div className="flex h-14 w-14 items-center justify-center rounded-full bg-chart-2/20">
-                <Award className="h-7 w-7 text-chart-2" />
-              </div>
-              <div>
-                <p className="text-3xl font-bold text-chart-2">142</p>
-                <p className="text-sm text-muted-foreground">{t("daysWithoutAccident")}</p>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
+      <StatCardList>
+        <InteractiveStatCard
+          label={t("daysWithoutAccident")}
+          value="142"
+          icon={Award}
+          variant="success"
+        />
         <InteractiveStatCard
           label={t("trainingsUpToDate")}
           value={`${stats.trainingsRate}%`}
@@ -298,7 +292,7 @@ export default function HsePage() {
           isActive={activeStatFilter === "alerts"}
           description="Requiert attention"
         />
-      </div>
+      </StatCardList>
 
       <div className="grid gap-6 lg:grid-cols-3">
         {/* Inspections Table with Pagination */}

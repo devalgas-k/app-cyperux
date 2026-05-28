@@ -23,6 +23,7 @@ import {
 } from "@/shared/components/ui/dialog"
 // import { useLanguage } from "@/lib/i18n"
 import { toast } from "sonner"
+import { StatCardList } from "@/shared/components/custom/stat-card-list"
 import { InteractiveStatCard } from "@/shared/components/custom/interactive-stat-card"
 import { DataTablePaginated, type FilterConfig, type ColumnConfig } from "@/shared/components/custom/data-table-paginated"
 
@@ -313,7 +314,7 @@ export default function DocumentsPage() {
       </div>
 
       {/* Interactive Stats */}
-      <div className="grid gap-4 md:grid-cols-5">
+      <StatCardList>
         <InteractiveStatCard
           label="Total Documents"
           value={stats.total}
@@ -358,7 +359,7 @@ export default function DocumentsPage() {
           isActive={activeStatFilter === "expired"}
           description="A renouveler"
         />
-      </div>
+      </StatCardList>
 
       {/* Active filter indicator */}
       {activeStatFilter && (

@@ -2,6 +2,8 @@
 
 import { useState, useRef } from "react"
 import { toast } from "sonner"
+import { StatCardList } from "@/shared/components/custom/stat-card-list"
+import { InteractiveStatCard } from "@/shared/components/custom/interactive-stat-card"
 import { 
   ClipboardList, 
   Users, 
@@ -265,60 +267,32 @@ export default function DailyReportPage() {
       </div>
 
       {/* Quick Stats */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <Card>
-          <CardContent className="p-4">
-            <div className="flex items-center gap-3">
-              <div className="h-10 w-10 rounded-lg bg-primary/10 flex items-center justify-center">
-                <ClipboardList className="h-5 w-5 text-primary" />
-              </div>
-              <div>
-                <div className="text-2xl font-bold">{reports.length}</div>
-                <div className="text-xs text-muted-foreground">Rapports totaux</div>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardContent className="p-4">
-            <div className="flex items-center gap-3">
-              <div className="h-10 w-10 rounded-lg bg-emerald-500/10 flex items-center justify-center">
-                <Send className="h-5 w-5 text-emerald-500" />
-              </div>
-              <div>
-                <div className="text-2xl font-bold">{reports.filter(r => r.status === "sent").length}</div>
-                <div className="text-xs text-muted-foreground">Envoyes</div>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardContent className="p-4">
-            <div className="flex items-center gap-3">
-              <div className="h-10 w-10 rounded-lg bg-amber-500/10 flex items-center justify-center">
-                <FileSignature className="h-5 w-5 text-amber-500" />
-              </div>
-              <div>
-                <div className="text-2xl font-bold">{reports.filter(r => r.status === "signed").length}</div>
-                <div className="text-xs text-muted-foreground">Signes</div>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardContent className="p-4">
-            <div className="flex items-center gap-3">
-              <div className="h-10 w-10 rounded-lg bg-muted flex items-center justify-center">
-                <Edit className="h-5 w-5 text-muted-foreground" />
-              </div>
-              <div>
-                <div className="text-2xl font-bold">{reports.filter(r => r.status === "draft").length}</div>
-                <div className="text-xs text-muted-foreground">Brouillons</div>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-      </div>
+      <StatCardList>
+        <InteractiveStatCard
+          label="Rapports totaux"
+          value={reports.length}
+          icon={ClipboardList}
+          variant="default"
+        />
+        <InteractiveStatCard
+          label="Envoyes"
+          value={reports.filter(r => r.status === "sent").length}
+          icon={Send}
+          variant="success"
+        />
+        <InteractiveStatCard
+          label="Signes"
+          value={reports.filter(r => r.status === "signed").length}
+          icon={FileSignature}
+          variant="warning"
+        />
+        <InteractiveStatCard
+          label="Brouillons"
+          value={reports.filter(r => r.status === "draft").length}
+          icon={Edit}
+          variant="info"
+        />
+      </StatCardList>
 
       {/* Reports List */}
       <Card>

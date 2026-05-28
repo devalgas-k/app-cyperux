@@ -20,23 +20,33 @@ interface InteractiveStatCardProps {
 
 const variantStyles = {
   default: {
-    icon: "bg-primary/20 text-primary",
+    icon: "bg-primary/10",
+    iconColor: "text-primary",
+    hoverBorder: "hover:border-primary/50",
     active: "ring-2 ring-primary ring-offset-2 ring-offset-background",
   },
   success: {
-    icon: "bg-chart-2/20 text-chart-2",
+    icon: "bg-chart-2/10",
+    iconColor: "text-chart-2",
+    hoverBorder: "hover:border-chart-2/50",
     active: "ring-2 ring-chart-2 ring-offset-2 ring-offset-background",
   },
   warning: {
-    icon: "bg-chart-3/20 text-chart-3",
+    icon: "bg-chart-3/10",
+    iconColor: "text-chart-3",
+    hoverBorder: "hover:border-chart-3/50",
     active: "ring-2 ring-chart-3 ring-offset-2 ring-offset-background",
   },
   danger: {
-    icon: "bg-destructive/20 text-destructive",
+    icon: "bg-destructive/10",
+    iconColor: "text-destructive",
+    hoverBorder: "hover:border-destructive/50",
     active: "ring-2 ring-destructive ring-offset-2 ring-offset-background",
   },
   info: {
-    icon: "bg-chart-4/20 text-chart-4",
+    icon: "bg-chart-4/10",
+    iconColor: "text-chart-4",
+    hoverBorder: "hover:border-chart-4/50",
     active: "ring-2 ring-chart-4 ring-offset-2 ring-offset-background",
   },
 }
@@ -57,23 +67,21 @@ export function InteractiveStatCard({
     <Card
       className={cn(
         "bg-card transition-all duration-200",
-        onClick && "cursor-pointer hover:bg-secondary/50 hover:scale-[1.02] active:scale-[0.98]",
+        onClick && `cursor-pointer hover:scale-[1.02] hover:shadow-lg ${styles.hoverBorder}`,
         isActive && styles.active
       )}
       onClick={onClick}
     >
-      <CardContent className="p-4">
-        <div className="flex items-center gap-3">
-          <div className={cn("flex h-10 w-10 items-center justify-center rounded-lg", styles.icon)}>
-            <Icon className="h-5 w-5" />
-          </div>
+      <CardContent className="pt-4 pb-4">
+        <div className="flex items-center justify-between">
           <div className="flex-1 min-w-0">
-            <div className="flex items-baseline gap-2">
-              <p className="text-2xl font-bold">{value}</p>
+            <p className="text-sm text-muted-foreground truncate">{label}</p>
+            <div className="flex items-baseline gap-2 mt-1">
+              <p className="text-2xl font-bold truncate">{value}</p>
               {trend && (
                 <span
                   className={cn(
-                    "text-xs font-medium",
+                    "text-xs font-medium shrink-0",
                     trend.isPositive ? "text-chart-2" : "text-destructive"
                   )}
                 >
@@ -81,29 +89,14 @@ export function InteractiveStatCard({
                 </span>
               )}
             </div>
-            <p className="text-xs text-muted-foreground truncate">{label}</p>
             {description && (
-              <p className="text-[10px] text-muted-foreground/70 truncate mt-0.5">{description}</p>
+              <p className="text-xs text-muted-foreground/70 truncate mt-1">{description}</p>
             )}
           </div>
-          {onClick && (
-            <div className="flex h-6 w-6 items-center justify-center rounded-full bg-muted/50 opacity-0 group-hover:opacity-100 transition-opacity">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="12"
-                height="12"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="text-muted-foreground"
-              >
-                <path d="m9 18 6-6-6-6" />
-              </svg>
-            </div>
-          )}
+          
+          <div className={cn("flex h-10 w-10 shrink-0 items-center justify-center rounded-full ml-4", styles.icon)}>
+            <Icon className={cn("h-5 w-5", styles.iconColor)} />
+          </div>
         </div>
       </CardContent>
     </Card>

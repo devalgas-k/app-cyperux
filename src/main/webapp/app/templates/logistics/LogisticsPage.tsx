@@ -13,6 +13,8 @@ import {
   TableRow,
 } from "@/shared/components/ui/table"
 import { Button } from "@/shared/components/ui/button"
+import { StatCardList } from "@/shared/components/custom/stat-card-list"
+import { InteractiveStatCard } from "@/shared/components/custom/interactive-stat-card"
 // import { useLanguage } from "@/lib/i18n"
 
 const fleet = [
@@ -97,60 +99,32 @@ export default function LogisticsPage() {
       </div>
 
       {/* Stats */}
-      <div className="grid gap-4 md:grid-cols-4">
-        <Card className="bg-card">
-          <CardContent className="p-4">
-            <div className="flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/20 text-primary">
-                <Truck className="h-5 w-5" />
-              </div>
-              <div>
-                <p className="text-2xl font-bold">12</p>
-                <p className="text-xs text-muted-foreground">Véhicules Actifs</p>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-        <Card className="bg-card">
-          <CardContent className="p-4">
-            <div className="flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-chart-2/20 text-chart-2">
-                <CheckCircle className="h-5 w-5" />
-              </div>
-              <div>
-                <p className="text-2xl font-bold">10</p>
-                <p className="text-xs text-muted-foreground">Autorisés ZFE</p>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-        <Card className="bg-card">
-          <CardContent className="p-4">
-            <div className="flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-destructive/20 text-destructive">
-                <AlertTriangle className="h-5 w-5" />
-              </div>
-              <div>
-                <p className="text-2xl font-bold">2</p>
-                <p className="text-xs text-muted-foreground">Bloqués ZFE</p>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-        <Card className="bg-card">
-          <CardContent className="p-4">
-            <div className="flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-chart-3/20 text-chart-3">
-                <MapPin className="h-5 w-5" />
-              </div>
-              <div>
-                <p className="text-2xl font-bold">3</p>
-                <p className="text-xs text-muted-foreground">Chantiers Actifs</p>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-      </div>
+      <StatCardList>
+        <InteractiveStatCard
+          label="Véhicules Actifs"
+          value="12"
+          icon={Truck}
+          variant="default"
+        />
+        <InteractiveStatCard
+          label="Autorisés ZFE"
+          value="10"
+          icon={CheckCircle}
+          variant="success"
+        />
+        <InteractiveStatCard
+          label="Bloqués ZFE"
+          value="2"
+          icon={AlertTriangle}
+          variant="danger"
+        />
+        <InteractiveStatCard
+          label="Chantiers Actifs"
+          value="3"
+          icon={MapPin}
+          variant="info"
+        />
+      </StatCardList>
 
       <div className="grid gap-6 lg:grid-cols-2">
         {/* ZFE Map */}

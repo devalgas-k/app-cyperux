@@ -25,7 +25,9 @@ import {
 } from "@/shared/components/ui/select"
 // import { useLanguage } from "@/lib/i18n"
 import { toast } from "sonner"
+import { StatCardList } from "@/shared/components/custom/stat-card-list"
 import { InteractiveStatCard } from "@/shared/components/custom/interactive-stat-card"
+import { useNavigate } from "react-router-dom"
 import { DataTablePaginated, type FilterConfig, type ColumnConfig } from "@/shared/components/custom/data-table-paginated"
 
 interface Team {
@@ -89,6 +91,7 @@ const filterConfigs: FilterConfig[] = [
 ]
 
 export default function ResourcesPage() {
+  const navigate = useNavigate()
   // const { t } = useLanguage()
   const t = (key: string) => key;
   const [showNewTeamDialog, setShowNewTeamDialog] = useState(false)
@@ -238,14 +241,14 @@ export default function ResourcesPage() {
           <h1 className="text-2xl font-semibold tracking-tight">{t("resources")}</h1>
           <p className="text-muted-foreground">{t("teamPlanning")}</p>
         </div>
-        <Button className="gap-2" onClick={() => setShowNewTeamDialog(true)}>
+        <Button className="gap-2" onClick={() => navigate("/templates/resources/new")}>
           <UserPlus className="h-4 w-4" />
           Nouvelle Equipe
         </Button>
       </div>
 
       {/* Interactive Stats */}
-      <div className="grid gap-4 md:grid-cols-5">
+      <StatCardList>
         <InteractiveStatCard
           label="Collaborateurs"
           value={stats.totalCollaborators}
@@ -289,7 +292,7 @@ export default function ResourcesPage() {
           variant="info"
           description="Moyenne globale"
         />
-      </div>
+      </StatCardList>
 
       <div className="grid gap-6 lg:grid-cols-3">
         {/* Teams Table */}
@@ -300,14 +303,14 @@ export default function ResourcesPage() {
           </CardHeader>
           <CardContent>
             <DataTablePaginated
-              data={filteredByStatTeams}
-              columns={columns}
-              filters={filterConfigs}
-              searchKeys={["name", "lead", "project"] as (keyof Team)[]}
-              pageSize={5}
-              onRowClick={(team) => toast.info("Equipe selectionnee", { description: `Details de ${team.name}` })}
-              showResultCount
-            />
+                data={filteredByStatTeams as any[]}
+                columns={columns as any[]}
+                filters={filterConfigs}
+                searchKeys={["name", "lead", "project"]}
+                pageSize={5}
+                onRowClick={(team: any) => navigate(`/templates/resources/${team.id}`)}
+                showResultCount
+              />
           </CardContent>
         </Card>
 
@@ -377,7 +380,7 @@ export default function ResourcesPage() {
             className={`bg-card cursor-pointer transition-all hover:scale-[1.02] ${
               team.status === "overloaded" ? "border-destructive/50" : "border-chart-3/50"
             }`}
-            onClick={() => toast.info("Equipe", { description: `Gerer ${team.name}` })}
+            onClick={() => navigate(`/templates/resources/${team.id}`)}
           >
             <CardContent className="p-4">
               <div className="flex items-start justify-between">

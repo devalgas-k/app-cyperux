@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useMemo } from "react"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { Plus, MoreHorizontal, Eye, Edit, Trash2, CalendarDays, FolderKanban, CheckCircle, AlertTriangle, Clock, TrendingUp } from "lucide-react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/shared/components/ui/card"
 import { Button } from "@/shared/components/ui/button"
@@ -14,6 +14,7 @@ import {
 } from "@/shared/components/ui/dropdown-menu"
 // import { useLanguage } from "@/lib/i18n"
 import { toast } from "sonner"
+import { StatCardList } from "@/shared/components/custom/stat-card-list"
 import { InteractiveStatCard } from "@/shared/components/custom/interactive-stat-card"
 import { DataTablePaginated, type FilterConfig, type ColumnConfig } from "@/shared/components/custom/data-table-paginated"
 
@@ -69,6 +70,7 @@ const filterConfigs: FilterConfig[] = [
 ]
 
 export default function ProjectsPage() {
+  const navigate = useNavigate()
   // const { t } = useLanguage()
   const t = (key: string) => key;
   const [activeStatFilter, setActiveStatFilter] = useState<string | null>(null)
@@ -221,17 +223,17 @@ export default function ProjectsPage() {
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
-              <DropdownMenuItem onClick={() => toast.info("Details", { description: `Ouverture du projet ${project.name}` })}>
-                <Eye className="mr-2 h-4 w-4" />
-                Voir details
-              </DropdownMenuItem>
-              <DropdownMenuItem asChild>
-                <Link to={`/projects/${project.id}/tasks`}>
-                  <CalendarDays className="mr-2 h-4 w-4" />
-                  Planification et Taches
-                </Link>
-              </DropdownMenuItem>
-              <DropdownMenuItem onClick={() => toast.info("Edition", { description: `Modification du projet ${project.name}` })}>
+                <DropdownMenuItem onClick={() => navigate(`/templates/projects/${project.id}`)}>
+                  <Eye className="mr-2 h-4 w-4" />
+                  Voir details
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link to={`/templates/projects/${project.id}/tasks`}>
+                    <CalendarDays className="mr-2 h-4 w-4" />
+                    Planification et Taches
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={() => navigate(`/templates/projects/${project.id}/edit`)}>
                 <Edit className="mr-2 h-4 w-4" />
                 Modifier
               </DropdownMenuItem>
@@ -265,7 +267,7 @@ export default function ProjectsPage() {
       </div>
 
       {/* Interactive Stats */}
-      <div className="grid gap-4 md:grid-cols-5">
+      <StatCardList>
         <InteractiveStatCard
           label="Total Projets"
           value={stats.total}
@@ -311,7 +313,7 @@ export default function ProjectsPage() {
           isActive={activeStatFilter === "Termine"}
           description="Livres"
         />
-      </div>
+      </StatCardList>
 
       {/* Projects Table with Pagination */}
       <Card className="bg-card">
@@ -325,14 +327,14 @@ export default function ProjectsPage() {
         </CardHeader>
         <CardContent>
           <DataTablePaginated
-            data={filteredByStatProjects}
-            columns={columns}
-            filters={filterConfigs}
-            searchKeys={["name", "team"] as (keyof Project)[]}
-            pageSize={5}
-            onRowClick={(project) => toast.info("Projet selectionne", { description: `Ouverture de ${project.name}` })}
-            showResultCount
-          />
+              data={filteredByStatProjects as any[]}
+              columns={columns as any[]}
+              filters={filterConfigs}
+              searchKeys={["name", "team"]}
+              pageSize={5}
+              onRowClick={(project: any) => navigate(`/templates/projects/${project.id}`)}
+              showResultCount
+            />
         </CardContent>
       </Card>
 
