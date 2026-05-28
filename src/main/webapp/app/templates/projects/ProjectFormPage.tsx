@@ -1,8 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { Link } from "react-router-dom"
-import { useRouter } from "next/navigation"
+import { Link, useNavigate, useParams } from "react-router-dom"
 import { toast } from "sonner"
 import { format } from "date-fns"
 import { fr } from "date-fns/locale"
@@ -79,8 +78,10 @@ const carbonTargets: Record<string, { target: number; description: string; sugge
   },
 }
 
-export default function NewProjectPage() {
-  const router = useRouter()
+export default function ProjectFormPage() {
+  const navigate = useNavigate()
+  const { id } = useParams()
+  const isEditMode = !!id
   
   // Form state
   const [projectName, setProjectName] = useState("")
@@ -111,6 +112,22 @@ export default function NewProjectPage() {
       setAiSuggestion(null)
     }
   }, [constructionType])
+
+  // Preload data for Edit Mode
+  useEffect(() => {
+    if (isEditMode) {
+      // Simulation d'une requête API pour récupérer le projet
+      setProjectName("Tour Hekla - La Défense")
+      setDescription("Projet de construction de tour IGH")
+      setConstructionType("commercial")
+      setBudget("15000000")
+      setStartDate(new Date(2024, 0, 1))
+      setEndDate(new Date(2025, 11, 31))
+      setMarkerPosition({ lat: 48.89, lng: 2.24 })
+      setGpsLat("48.89")
+      setGpsLng("2.24")
+    }
+  }, [isEditMode, id])
   
   // Handle map click for marker placement
   const handleMapClick = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -137,10 +154,10 @@ export default function NewProjectPage() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     // In a real app, this would submit to an API
-    toast.success("Projet cree avec succes", {
-      description: `Le projet "${projectName}" a ete ajoute a votre liste de projets.`
+    toast.success(isEditMode ? "Projet mis à jour avec succès" : "Projet créé avec succès", {
+      description: isEditMode ? "Les modifications ont été sauvegardées." : `Le projet "${projectName}" a été ajouté à votre liste de projets.`
     })
-    router.push("/projects")
+    navigate("/templates/projects")
   }
   
   return (
@@ -161,16 +178,27 @@ export default function NewProjectPage() {
             </BreadcrumbSeparator>
             <BreadcrumbItem>
               <BreadcrumbPage className="text-foreground font-medium">
-                Nouveau Projet
+                {isEditMode ? "Édition" : "Nouveau Projet"}
               </BreadcrumbPage>
             </BreadcrumbItem>
           </BreadcrumbList>
         </Breadcrumb>
-        <div>
-          <h1 className="text-2xl font-bold tracking-tight">Création de Projet BTP</h1>
-          <p className="text-muted-foreground">
-            Renseignez les informations du nouveau chantier
-          </p>
+        <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+          <div>
+            <h1 className="text-2xl font-bold tracking-tight">{isEditMode ? "Modifier le projet" : "Création de Projet BTP"}</h1>
+            <p className="text-muted-foreground">
+              {isEditMode ? "Modifiez les informations de ce projet." : "Renseignez les informations du nouveau chantier"}
+            </p>
+          </div>
+          <div className="flex gap-2">
+            <Button variant="outline" type="button" onClick={() => navigate("/templates/projects")}>
+              Annuler
+            </Button>
+            <Button onClick={handleSubmit} type="button" className="gap-2">
+              <Sparkles className="h-4 w-4" />
+              {isEditMode ? "Enregistrer les modifications" : "Créer le projet"}
+            </Button>
+          </div>
         </div>
       </div>
       
@@ -299,7 +327,6 @@ export default function NewProjectPage() {
                         mode="single"
                         selected={startDate}
                         onSelect={setStartDate}
-                        initialFocus
                         locale={fr}
                       />
                     </PopoverContent>
@@ -326,7 +353,6 @@ export default function NewProjectPage() {
                         mode="single"
                         selected={endDate}
                         onSelect={setEndDate}
-                        initialFocus
                         locale={fr}
                         disabled={(date) => startDate ? date < startDate : false}
                       />
@@ -558,22 +584,22 @@ export default function NewProjectPage() {
         </Card>
         
         {/* Action Buttons */}
-        <div className="mt-6 flex items-center justify-end gap-3">
-          <Button 
-            type="button" 
-            variant="outline"
-            onClick={() => router.push("/projects")}
-          >
-            Annuler
-          </Button>
-          <Button 
-            type="submit"
-            className="bg-[#593196] text-white hover:bg-[#593196]/90"
-            disabled={!projectName || !constructionType || !budget || !startDate || !endDate}
-          >
-            Créer le projet
-          </Button>
-        </div>
+          <div className="mt-6 flex items-center justify-end gap-3">
+            <Button 
+              type="button" 
+              variant="outline"
+              onClick={() => navigate("/templates/projects")}
+            >
+              Annuler
+            </Button>
+            <Button 
+              type="submit"
+              className="bg-[#593196] text-white hover:bg-[#593196]/90"
+              disabled={!projectName || !constructionType || !budget || !startDate || !endDate}
+            >
+              {isEditMode ? "Enregistrer les modifications" : "Créer le projet"}
+            </Button>
+          </div>
       </form>
     </div>
   )

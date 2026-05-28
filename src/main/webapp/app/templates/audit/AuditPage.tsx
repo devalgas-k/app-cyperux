@@ -57,6 +57,9 @@ import {
   GitCompare,
   ExternalLink,
 } from "lucide-react"
+import { ScrollArea } from "@/shared/components/ui/scroll-area"
+import { StatCardList } from "@/shared/components/custom/stat-card-list"
+import { InteractiveStatCard } from "@/shared/components/custom/interactive-stat-card"
 // import { useLanguage } from "@/lib/i18n"
 
 // Types
@@ -400,64 +403,32 @@ export default function AuditTrailPage() {
       </div>
 
       {/* Stats Cards */}
-      <div className="grid gap-4 md:grid-cols-4">
-        <Card className="border-primary/20">
-          <CardContent className="pt-6">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm text-muted-foreground">Actions (24h)</p>
-                <p className="text-3xl font-bold">{auditLogs.length}</p>
-              </div>
-              <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/20">
-                <Clock className="h-6 w-6 text-primary" />
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-        <Card className="border-amber-500/20">
-          <CardContent className="pt-6">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm text-muted-foreground">Alertes Attention</p>
-                <p className="text-3xl font-bold text-amber-500">
-                  {auditLogs.filter(l => l.severity === "warning").length}
-                </p>
-              </div>
-              <div className="flex h-12 w-12 items-center justify-center rounded-full bg-amber-500/20">
-                <AlertTriangle className="h-6 w-6 text-amber-500" />
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-        <Card className="border-red-500/20">
-          <CardContent className="pt-6">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm text-muted-foreground">Événements Critiques</p>
-                <p className="text-3xl font-bold text-red-500">
-                  {auditLogs.filter(l => l.severity === "critical").length}
-                </p>
-              </div>
-              <div className="flex h-12 w-12 items-center justify-center rounded-full bg-red-500/20">
-                <ShieldAlert className="h-6 w-6 text-red-500" />
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-        <Card className="border-emerald-500/20">
-          <CardContent className="pt-6">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm text-muted-foreground">Hash Vérifiés</p>
-                <p className="text-3xl font-bold text-emerald-500">100%</p>
-              </div>
-              <div className="flex h-12 w-12 items-center justify-center rounded-full bg-emerald-500/20">
-                <ShieldCheck className="h-6 w-6 text-emerald-500" />
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-      </div>
+      <StatCardList>
+        <InteractiveStatCard
+          label="Actions (24h)"
+          value={auditLogs.length}
+          icon={Clock}
+          variant="default"
+        />
+        <InteractiveStatCard
+          label="Alertes Attention"
+          value={auditLogs.filter(l => l.severity === "warning").length}
+          icon={AlertTriangle}
+          variant="warning"
+        />
+        <InteractiveStatCard
+          label="Événements Critiques"
+          value={auditLogs.filter(l => l.severity === "critical").length}
+          icon={ShieldAlert}
+          variant="danger"
+        />
+        <InteractiveStatCard
+          label="Hash Vérifiés"
+          value="100%"
+          icon={ShieldCheck}
+          variant="success"
+        />
+      </StatCardList>
 
       {/* Filters */}
       <Card>
@@ -793,8 +764,8 @@ export default function AuditTrailPage() {
         </Button>
       )}
 
-      {/* Glowing animation style */}
-      <style jsx global>{`
+      {/* Trust Chain Visualizer */}
+      <style>{`
         @keyframes pulse {
           0%, 100% { opacity: 1; }
           50% { opacity: 0.7; }

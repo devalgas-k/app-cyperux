@@ -42,6 +42,9 @@ import {
   DialogFooter,
 } from "@/shared/components/ui/dialog"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/shared/components/ui/tabs"
+import { ScrollArea } from "@/shared/components/ui/scroll-area"
+import { StatCardList } from "@/shared/components/custom/stat-card-list"
+import { InteractiveStatCard } from "@/shared/components/custom/interactive-stat-card"
 // import { useLanguage } from "@/lib/i18n"
 
 const connectors = [
@@ -199,60 +202,32 @@ export default function MarketplacePage() {
       </div>
 
       {/* Stats Cards */}
-      <div className="grid gap-4 md:grid-cols-4">
-        <Card>
-          <CardContent className="pt-6">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm text-muted-foreground">Connecteurs Actifs</p>
-                <p className="text-2xl font-bold">{connectedCount}</p>
-              </div>
-              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-emerald-500/20">
-                <Zap className="h-5 w-5 text-emerald-400" />
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardContent className="pt-6">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm text-muted-foreground">Syncs Aujourd&apos;hui</p>
-                <p className="text-2xl font-bold">1,247</p>
-              </div>
-              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-blue-500/20">
-                <RefreshCw className="h-5 w-5 text-blue-400" />
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardContent className="pt-6">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm text-muted-foreground">Donnees Transferees</p>
-                <p className="text-2xl font-bold">2.4 GB</p>
-              </div>
-              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-purple-500/20">
-                <Database className="h-5 w-5 text-purple-400" />
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardContent className="pt-6">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm text-muted-foreground">Taux de Succes</p>
-                <p className="text-2xl font-bold">99.8%</p>
-              </div>
-              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-emerald-500/20">
-                <Check className="h-5 w-5 text-emerald-400" />
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-      </div>
+      <StatCardList>
+        <InteractiveStatCard
+          label="Connecteurs Actifs"
+          value={connectedCount}
+          icon={Zap}
+          variant="success"
+        />
+        <InteractiveStatCard
+          label="Syncs Aujourd'hui"
+          value="1,247"
+          icon={RefreshCw}
+          variant="info"
+        />
+        <InteractiveStatCard
+          label="Donnees Transferees"
+          value="2.4 GB"
+          icon={Database}
+          variant="purple"
+        />
+        <InteractiveStatCard
+          label="Taux de Succes"
+          value="99.8%"
+          icon={Check}
+          variant="success"
+        />
+      </StatCardList>
 
       {/* Search and Filters */}
       <div className="flex flex-col gap-4 sm:flex-row">

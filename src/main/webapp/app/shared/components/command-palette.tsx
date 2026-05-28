@@ -1,7 +1,7 @@
 "use client"
 
 import * as React from "react"
-import { useRouter } from "next/navigation"
+import { useNavigate } from "react-router-dom"
 import {
   Search,
   FolderKanban,
@@ -27,37 +27,37 @@ import {
 import { Input } from "@/shared/components/ui/input"
 import { Badge } from "@/shared/components/ui/badge"
 import { ScrollArea } from "@/shared/components/ui/scroll-area"
-import { cn } from "@/lib/utils"
+import { cn } from "@/shared/utils"
 
 // Mock data for search results
 const projects = [
-  { id: "hekla", name: "Tour Hekla", status: "En cours", budget: "45M€", href: "/projects" },
-  { id: "ecoquartier", name: "Eco-Quartier Confluence", status: "Planification", budget: "28M€", href: "/projects" },
-  { id: "gare", name: "Gare du Nord Extension", status: "En cours", budget: "120M€", href: "/projects" },
+  { id: "hekla", name: "Tour Hekla", status: "En cours", budget: "45M€", href: "/templates/projects" },
+  { id: "ecoquartier", name: "Eco-Quartier Confluence", status: "Planification", budget: "28M€", href: "/templates/projects" },
+  { id: "gare", name: "Gare du Nord Extension", status: "En cours", budget: "120M€", href: "/templates/projects" },
 ]
 
 const documents = [
-  { id: "plan-r1", name: "Plan_Structure_R+1.pdf", type: "Plan", status: "BPE", href: "/documents" },
-  { id: "cctp-03", name: "CCTP Lot 03 - Gros Œuvre", type: "CCTP", status: "En revue", href: "/documents" },
-  { id: "dtu-21", name: "DTU 21 - Béton armé", type: "Norme", status: "Validé", href: "/documents" },
-  { id: "re2020", name: "Rapport RE2020 - Phase 1", type: "Rapport", status: "BPE", href: "/documents/bpe" },
+  { id: "plan-r1", name: "Plan_Structure_R+1.pdf", type: "Plan", status: "BPE", href: "/templates/documents" },
+  { id: "cctp-03", name: "CCTP Lot 03 - Gros Œuvre", type: "CCTP", status: "En revue", href: "/templates/documents" },
+  { id: "dtu-21", name: "DTU 21 - Béton armé", type: "Norme", status: "Validé", href: "/templates/documents" },
+  { id: "re2020", name: "Rapport RE2020 - Phase 1", type: "Rapport", status: "BPE", href: "/templates/documents/bpe" },
 ]
 
 const tasks = [
-  { id: "fondations", name: "Fondations - Zone A", phase: "Gros Œuvre", status: "En cours", href: "/planning" },
-  { id: "coffrage", name: "Coffrage R+2", phase: "Structure", status: "Planifié", href: "/planning" },
-  { id: "ferraillage", name: "Ferraillage Dalles", phase: "Gros Œuvre", status: "En attente", href: "/planning" },
-  { id: "reseaux", name: "Réseaux CVC R+1", phase: "Second Œuvre", status: "À venir", href: "/planning" },
+  { id: "fondations", name: "Fondations - Zone A", phase: "Gros Œuvre", status: "En cours", href: "/templates/planning" },
+  { id: "coffrage", name: "Coffrage R+2", phase: "Structure", status: "Planifié", href: "/templates/planning" },
+  { id: "ferraillage", name: "Ferraillage Dalles", phase: "Gros Œuvre", status: "En attente", href: "/templates/planning" },
+  { id: "reseaux", name: "Réseaux CVC R+1", phase: "Second Œuvre", status: "À venir", href: "/templates/planning" },
 ]
 
 const quickActions = [
-  { id: "new-project", name: "Créer un projet", icon: Plus, href: "/projects/new", shortcut: "N" },
-  { id: "new-task", name: "Ajouter une tâche", icon: ListTodo, href: "/planning", shortcut: "T" },
-  { id: "new-reserve", name: "Ajouter une réserve", icon: ClipboardList, href: "/punch-list", shortcut: "R" },
-  { id: "new-incident", name: "Signaler un incident", icon: Zap, href: "/site-issues", shortcut: "I" },
-  { id: "view-calendar", name: "Voir le planning", icon: Calendar, href: "/planning", shortcut: "P" },
-  { id: "view-logistics", name: "Logistique JIT", icon: Truck, href: "/logistics/jit", shortcut: "L" },
-  { id: "view-finance", name: "Tableau financier", icon: DollarSign, href: "/finance", shortcut: "F" },
+  { id: "new-project", name: "Créer un projet", icon: Plus, href: "/templates/projects/new", shortcut: "N" },
+  { id: "new-task", name: "Ajouter une tâche", icon: ListTodo, href: "/templates/planning", shortcut: "T" },
+  { id: "new-reserve", name: "Ajouter une réserve", icon: ClipboardList, href: "/templates/punch-list", shortcut: "R" },
+  { id: "new-incident", name: "Signaler un incident", icon: Zap, href: "/templates/site-issues", shortcut: "I" },
+  { id: "view-calendar", name: "Voir le planning", icon: Calendar, href: "/templates/planning", shortcut: "P" },
+  { id: "view-logistics", name: "Logistique JIT", icon: Truck, href: "/templates/logistics/jit", shortcut: "L" },
+  { id: "view-finance", name: "Tableau financier", icon: DollarSign, href: "/templates/finance", shortcut: "F" },
 ]
 
 // AI-powered suggestions based on query
@@ -67,43 +67,43 @@ const getAISuggestions = (query: string) => {
       query: "béton",
       response: "Le coulage béton sur Tour Hekla est à 78% d'avancement. Prochaine phase prévue le 15 mai.",
       action: "Voir le détail du planning béton",
-      href: "/planning",
+      href: "/templates/planning",
     },
     {
       query: "hekla",
       response: "Tour Hekla : Budget consommé 67%, Carbone 420 kgCO2e/m², 2 alertes HSE en cours.",
       action: "Ouvrir le tableau de bord projet",
-      href: "/projects",
+      href: "/templates/projects",
     },
     {
       query: "retard",
       response: "3 tâches en retard identifiées. Impact estimé : +5 jours sur le chemin critique.",
       action: "Voir les tâches en retard",
-      href: "/planning",
+      href: "/templates/planning",
     },
     {
       query: "budget",
       response: "Budget global : 45M€ engagés sur 52M€ prévus. CPI actuel : 1.08 (favorable).",
       action: "Ouvrir le dashboard financier",
-      href: "/finance",
+      href: "/templates/finance",
     },
     {
       query: "carbone",
       response: "Empreinte carbone actuelle : 450 kgCO2e/m². Objectif RE2020 : 380 kgCO2e/m². Dépassement de 18%.",
       action: "Voir les recommandations IA",
-      href: "/analytics/re2020",
+      href: "/templates/analytics/re2020",
     },
     {
       query: "livraison",
       response: "2 livraisons prévues aujourd'hui. Camion #42 en approche (ETA 14h30). 1 conflit ZFE détecté.",
       action: "Ouvrir la tour de contrôle",
-      href: "/logistics/jit",
+      href: "/templates/logistics/jit",
     },
     {
       query: "réserve",
       response: "12 réserves ouvertes sur Tour Hekla. 3 critiques à traiter avant le 20 mai.",
       action: "Voir les réserves OPR",
-      href: "/punch-list",
+      href: "/templates/punch-list",
     },
   ]
 
@@ -122,7 +122,7 @@ interface CommandPaletteProps {
 }
 
 export function CommandPalette({ open, onOpenChange }: CommandPaletteProps) {
-  const router = useRouter()
+  const navigate = useNavigate()
   const [query, setQuery] = React.useState("")
   const [selectedIndex, setSelectedIndex] = React.useState(0)
   const inputRef = React.useRef<HTMLInputElement>(null)
@@ -144,11 +144,11 @@ export function CommandPalette({ open, onOpenChange }: CommandPaletteProps) {
 
   // Calculate total results for keyboard navigation
   const allResults = [
-    ...aiSuggestions.map((s) => ({ type: "ai", ...s })),
-    ...filteredProjects.map((p) => ({ type: "project", ...p })),
-    ...filteredDocuments.map((d) => ({ type: "document", ...d })),
-    ...filteredTasks.map((t) => ({ type: "task", ...t })),
-    ...filteredActions.map((a) => ({ type: "action", ...a })),
+    ...aiSuggestions.map((s) => ({ resultType: "ai", ...s })),
+    ...filteredProjects.map((p) => ({ resultType: "project", ...p })),
+    ...filteredDocuments.map((d) => ({ resultType: "document", ...d })),
+    ...filteredTasks.map((t) => ({ resultType: "task", ...t })),
+    ...filteredActions.map((a) => ({ resultType: "action", ...a })),
   ]
 
   React.useEffect(() => {
@@ -173,7 +173,7 @@ export function CommandPalette({ open, onOpenChange }: CommandPaletteProps) {
     } else if (e.key === "Enter" && allResults[selectedIndex]) {
       e.preventDefault()
       const result = allResults[selectedIndex]
-      router.push(result.href)
+      navigate(result.href)
       onOpenChange(false)
     } else if (e.key === "Escape") {
       onOpenChange(false)
@@ -181,7 +181,7 @@ export function CommandPalette({ open, onOpenChange }: CommandPaletteProps) {
   }
 
   const handleResultClick = (href: string) => {
-    router.push(href)
+    navigate(href)
     onOpenChange(false)
   }
 

@@ -61,6 +61,9 @@ import {
   SelectValue,
 } from "@/shared/components/ui/select"
 import { Textarea } from "@/shared/components/ui/textarea"
+import { ScrollArea } from "@/shared/components/ui/scroll-area"
+import { StatCardList } from "@/shared/components/custom/stat-card-list"
+import { InteractiveStatCard } from "@/shared/components/custom/interactive-stat-card"
 // import { useLanguage } from "@/lib/i18n"
 
 const apiKeys = [
@@ -207,60 +210,32 @@ export default function DeveloperPortalPage() {
       </div>
 
       {/* Stats */}
-      <div className="grid gap-4 md:grid-cols-4">
-        <Card>
-          <CardContent className="pt-6">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm text-muted-foreground">Requetes Aujourd&apos;hui</p>
-                <p className="text-2xl font-bold">15,730</p>
-              </div>
-              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-emerald-500/20">
-                <Zap className="h-5 w-5 text-emerald-400" />
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardContent className="pt-6">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm text-muted-foreground">Latence Moyenne</p>
-                <p className="text-2xl font-bold">24ms</p>
-              </div>
-              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-blue-500/20">
-                <Clock className="h-5 w-5 text-blue-400" />
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardContent className="pt-6">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm text-muted-foreground">Taux de Succes</p>
-                <p className="text-2xl font-bold">99.9%</p>
-              </div>
-              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-emerald-500/20">
-                <CheckCircle className="h-5 w-5 text-emerald-400" />
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardContent className="pt-6">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm text-muted-foreground">Cles Actives</p>
-                <p className="text-2xl font-bold">2</p>
-              </div>
-              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-purple-500/20">
-                <Key className="h-5 w-5 text-purple-400" />
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-      </div>
+      <StatCardList>
+        <InteractiveStatCard
+          label="Requetes Aujourd'hui"
+          value="15,730"
+          icon={Zap}
+          variant="success"
+        />
+        <InteractiveStatCard
+          label="Latence Moyenne"
+          value="24ms"
+          icon={Clock}
+          variant="info"
+        />
+        <InteractiveStatCard
+          label="Taux de Succes"
+          value="99.9%"
+          icon={CheckCircle}
+          variant="success"
+        />
+        <InteractiveStatCard
+          label="Cles Actives"
+          value="2"
+          icon={Key}
+          variant="default"
+        />
+      </StatCardList>
 
       {/* Tabs */}
       <Tabs defaultValue="api-keys">

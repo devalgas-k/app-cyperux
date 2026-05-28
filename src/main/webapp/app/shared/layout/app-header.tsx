@@ -10,18 +10,17 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/shared/components/ui/dropdown-menu"
-// import { useLanguage } from "@/lib/i18n"
-// import { CommandPalette } from "@/components/command-palette"
+import { CommandPalette } from "@/shared/components/command-palette"
 import { Link, useLocation } from "react-router-dom"
-// import { useTheme } from "next-themes"
+import { useTheme } from "next-themes"
+import { useTranslation } from "react-i18next"
 
 export function AppHeader() {
-  // Mock pour l'instant
-  const t = (key: string) => key;
-  const language = "fr" as string;
-  const setLanguage = (lang: string) => {};
-  const theme = "light" as string;
-  const setTheme = (theme: string) => {};
+  const { theme, setTheme } = useTheme()
+  const { t, i18n } = useTranslation()
+  const language = i18n.language
+  const setLanguage = (lang: string) => i18n.changeLanguage(lang)
+  
   const [commandOpen, setCommandOpen] = React.useState(false)
   const [mounted, setMounted] = React.useState(false)
 
@@ -117,7 +116,7 @@ export function AppHeader() {
         </div>
       </header>
 
-      {/* <CommandPalette open={commandOpen} onOpenChange={setCommandOpen} /> */}
+      <CommandPalette open={commandOpen} onOpenChange={setCommandOpen} />
     </>
   )
 }

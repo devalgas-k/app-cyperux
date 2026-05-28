@@ -34,7 +34,8 @@ import { Button } from "@/shared/components/ui/button"
 import { Badge } from "@/shared/components/ui/badge"
 import { Input } from "@/shared/components/ui/input"
 import { Textarea } from "@/shared/components/ui/textarea"
-import { Avatar, AvatarFallback } from "@/shared/components/ui/avatar"
+import { StatCardList } from "@/shared/components/custom/stat-card-list"
+import { InteractiveStatCard } from "@/shared/components/custom/interactive-stat-card"
 import { Progress } from "@/shared/components/ui/progress"
 import { ScrollArea } from "@/shared/components/ui/scroll-area"
 import { Separator } from "@/shared/components/ui/separator"
@@ -590,60 +591,32 @@ export default function SiteDiaryPage() {
         </div>
 
         {/* Stats Cards */}
-        <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
-          <Card className="border-muted/50 bg-card/50">
-            <CardContent className="p-3">
-              <div className="flex items-center gap-2">
-                <div className="rounded-lg bg-blue-500/20 p-2">
-                  <Camera className="h-4 w-4 text-blue-400" />
-                </div>
-                <div>
-                  <p className="text-lg font-semibold">24</p>
-                  <p className="text-xs text-muted-foreground">Photos du jour</p>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-          <Card className="border-muted/50 bg-card/50">
-            <CardContent className="p-3">
-              <div className="flex items-center gap-2">
-                <div className="rounded-lg bg-amber-500/20 p-2">
-                  <AlertTriangle className="h-4 w-4 text-amber-400" />
-                </div>
-                <div>
-                  <p className="text-lg font-semibold">3</p>
-                  <p className="text-xs text-muted-foreground">Aléas signalés</p>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-          <Card className="border-muted/50 bg-card/50">
-            <CardContent className="p-3">
-              <div className="flex items-center gap-2">
-                <div className="rounded-lg bg-green-500/20 p-2">
-                  <Check className="h-4 w-4 text-green-400" />
-                </div>
-                <div>
-                  <p className="text-lg font-semibold">12</p>
-                  <p className="text-xs text-muted-foreground">Tâches terminées</p>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-          <Card className="border-muted/50 bg-card/50">
-            <CardContent className="p-3">
-              <div className="flex items-center gap-2">
-                <div className="rounded-lg bg-purple-500/20 p-2">
-                  <User className="h-4 w-4 text-purple-400" />
-                </div>
-                <div>
-                  <p className="text-lg font-semibold">45</p>
-                  <p className="text-xs text-muted-foreground">Personnes sur site</p>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
+        <StatCardList>
+          <InteractiveStatCard
+            label="Photos du jour"
+            value="24"
+            icon={Camera}
+            variant="info"
+          />
+          <InteractiveStatCard
+            label="Aléas signalés"
+            value="3"
+            icon={AlertTriangle}
+            variant="warning"
+          />
+          <InteractiveStatCard
+            label="Tâches terminées"
+            value="12"
+            icon={Check}
+            variant="success"
+          />
+          <InteractiveStatCard
+            label="Personnes sur site"
+            value="45"
+            icon={User}
+            variant="default"
+          />
+        </StatCardList>
 
         {/* Main Content Grid */}
         <div className="grid flex-1 gap-4 overflow-hidden lg:grid-cols-2">

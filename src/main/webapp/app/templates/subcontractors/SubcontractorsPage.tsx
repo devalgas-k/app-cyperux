@@ -34,6 +34,7 @@ import {
 } from "lucide-react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/shared/components/ui/card"
 import { Badge } from "@/shared/components/ui/badge"
+import { Label } from "@/shared/components/ui/label"
 import { Button } from "@/shared/components/ui/button"
 import { Input } from "@/shared/components/ui/input"
 import { Progress } from "@/shared/components/ui/progress"
@@ -70,6 +71,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/shared/components/ui
 // import { useLanguage } from "@/lib/i18n"
 import { toast } from "sonner"
 import { cn } from "@/shared/utils"
+import { useNavigate } from "react-router-dom"
 
 interface Document {
   name: string
@@ -278,6 +280,7 @@ const getDocStatusDot = (status: string) => {
 }
 
 export default function SubcontractorsPage() {
+  const navigate = useNavigate()
   // const { t } = useLanguage()
   const t = (key: string) => key;
   const [selectedSub, setSelectedSub] = useState<Subcontractor | null>(null)
@@ -287,7 +290,7 @@ export default function SubcontractorsPage() {
   const [showBlockDialog, setShowBlockDialog] = useState(false)
   const [subToBlock, setSubToBlock] = useState<Subcontractor | null>(null)
   const [uploadingDoc, setUploadingDoc] = useState<string | null>(null)
-  const [aiMessages, setAiMessages] = useState([
+  const [aiMessages, setAiMessages] = useState<any[]>([
     {
       role: "assistant",
       content: "L'attestation URSSAF de 'Sarl Plomberie' expire dans 3 jours. J'ai préparé l'email de demande de mise à jour. Envoyer ?",
@@ -397,7 +400,7 @@ export default function SubcontractorsPage() {
               <RefreshCw className="h-4 w-4" />
               Vérifier tous
             </Button>
-            <Button className="gap-2 bg-[#593196] hover:bg-[#593196]/90" onClick={() => setShowAddDialog(true)}>
+            <Button className="gap-2 bg-[#593196] hover:bg-[#593196]/90" onClick={() => navigate("/templates/subcontractors/new")}>
               <Plus className="h-4 w-4" />
               Ajouter sous-traitant
             </Button>
@@ -631,6 +634,17 @@ export default function SubcontractorsPage() {
                     </TableCell>
                     <TableCell className="font-medium">{(sub.contractValue / 1000).toFixed(0)}k€</TableCell>
                     <TableCell className="text-right">
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        className="mr-2 gap-1"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          navigate(`/templates/subcontractors/${sub.id}/edit`);
+                        }}
+                      >
+                        Modifier
+                      </Button>
                       {(sub.status === "non_compliant" || sub.status === "warning") && !sub.blocked && (
                         <Button
                           variant="destructive"

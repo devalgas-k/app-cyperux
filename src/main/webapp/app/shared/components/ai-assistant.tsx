@@ -1,14 +1,14 @@
 "use client"
 
 import { useState, useRef, useEffect } from "react"
-import { usePathname } from "next/navigation"
+import { useNavigate, useLocation } from "react-router-dom"
 import { Button } from "@/shared/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/shared/components/ui/card"
 import { Input } from "@/shared/components/ui/input"
 import { ScrollArea } from "@/shared/components/ui/scroll-area"
 import { Badge } from "@/shared/components/ui/badge"
 
-import { cn } from "@/lib/utils"
+import { cn } from "@/shared/utils"
 import {
   Bot,
   X,
@@ -72,7 +72,7 @@ const pageContextMap: Record<string, ContextItem[]> = {
     { icon: <Sparkles className="h-3 w-3" />, label: "Page", value: "Liste des projets" },
     { icon: <FileText className="h-3 w-3" />, label: "Projets", value: "Tour Hekla, Eco-Quartier, Gare du Nord" },
   ],
-  "/projects/new": [
+  "/templates/projects/new": [
     { icon: <Sparkles className="h-3 w-3" />, label: "Page", value: "Nouveau Projet" },
     { icon: <FileText className="h-3 w-3" />, label: "Formulaire", value: "Création BTP" },
   ],
@@ -117,7 +117,8 @@ export function AIAssistant() {
   const [input, setInput] = useState("")
   const [isTyping, setIsTyping] = useState(false)
   const scrollRef = useRef<HTMLDivElement>(null)
-  const pathname = usePathname()
+  const location = useLocation()
+  const pathname = location.pathname
 
   const currentContext = pageContextMap[pathname] || pageContextMap["/"]
 

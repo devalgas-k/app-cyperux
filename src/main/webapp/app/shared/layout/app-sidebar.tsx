@@ -112,10 +112,12 @@ const systemNavItems = [
   { key: "admin", href: "/templates/admin", icon: Settings },
 ]
 
+import { useTranslation } from "react-i18next"
+
 export function AppSidebar() {
+  const { t } = useTranslation()
   const location = useLocation()
   const pathname = location.pathname
-  const t = (key: string) => key;
 
   return (
     <Sidebar>
@@ -130,19 +132,20 @@ export function AppSidebar() {
           <SidebarGroupContent>
             <SidebarMenu>
               {mainNavItems.map((item) => (
-                <SidebarMenuItem key={item.key}>
-                  <SidebarMenuButton
-                    asChild
-                    isActive={pathname === item.href}
-                    className="transition-colors hover:bg-sidebar-accent"
-                  >
-                    <Link to={item.href}>
-                      <item.icon className="h-4 w-4" />
-                      <span>{t(item.key)}</span>
-                    </Link>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
-              ))}
+                  <SidebarMenuItem key={item.key}>
+                    <SidebarMenuButton
+                      asChild
+                      isActive={pathname === item.href}
+                      className="transition-colors hover:bg-sidebar-accent"
+                      tooltip={t(`nav.${item.key}`)}
+                    >
+                      <Link to={item.href}>
+                        <item.icon className="h-4 w-4" />
+                        <span>{t(`nav.${item.key}`)}</span>
+                      </Link>
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                ))}
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
@@ -156,10 +159,11 @@ export function AppSidebar() {
                     asChild
                     isActive={pathname === item.href}
                     className="transition-colors hover:bg-sidebar-accent"
+                    tooltip={t(`nav.${item.key}`)}
                   >
                     <Link to={item.href}>
                       <item.icon className="h-4 w-4" />
-                      <span>{t(item.key)}</span>
+                      <span>{t(`nav.${item.key}`)}</span>
                     </Link>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
@@ -177,10 +181,11 @@ export function AppSidebar() {
                     asChild
                     isActive={pathname === item.href}
                     className="transition-colors hover:bg-sidebar-accent"
+                    tooltip={t(`nav.${item.key}`)}
                   >
                     <Link to={item.href}>
                       <item.icon className="h-4 w-4" />
-                      <span>{t(item.key)}</span>
+                      <span>{t(`nav.${item.key}`)}</span>
                     </Link>
                   </SidebarMenuButton>
                 </SidebarMenuItem>

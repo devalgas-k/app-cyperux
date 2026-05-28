@@ -5,12 +5,11 @@ import { AppSidebar } from './app-sidebar';
 import { AppHeader } from './app-header';
 import { Toaster } from '@/shared/components/ui/sonner';
 // import { AIAssistant } from '@/shared/components/ai-assistant';
-// import { ThemeProvider } from '@/shared/components/theme-provider';
-// import { LanguageProvider } from '@/shared/i18n';
+import { ThemeProvider } from '@/shared/components/theme-provider';
 
 export default function MainLayout() {
   return (
-    <>
+    <ThemeProvider defaultTheme="light" attribute="class">
       <SidebarProvider>
         <AppSidebar />
         <SidebarInset>
@@ -21,6 +20,6 @@ export default function MainLayout() {
         </SidebarInset>
       </SidebarProvider>
       <Toaster />
-    </>
+    </ThemeProvider>
   );
 }

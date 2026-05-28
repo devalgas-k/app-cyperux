@@ -61,6 +61,8 @@ import {
   PopoverTrigger,
 } from "@/shared/components/ui/popover"
 import { Calendar as CalendarComponent } from "@/shared/components/ui/calendar"
+import { StatCardList } from "@/shared/components/custom/stat-card-list"
+import { InteractiveStatCard } from "@/shared/components/custom/interactive-stat-card"
 import { Switch } from "@/shared/components/ui/switch"
 import { cn } from "@/shared/utils"
 // import { useLanguage } from "@/lib/i18n"
@@ -414,81 +416,45 @@ export default function PlanningPage() {
           </div>
         </div>
 
-        <div className="grid grid-cols-4 gap-4">
-          <Card 
-            className="cursor-pointer transition-all hover:scale-[1.02] hover:shadow-lg hover:border-[#593196]/50"
+        <StatCardList>
+          <InteractiveStatCard
+            label="Tâches Totales"
+            value={tasks.length}
+            icon={Calendar}
+            variant="purple"
             onClick={() => {
               setExpandedPhases(["fondations", "gros-oeuvre", "second-oeuvre", "finitions"])
-              toast.success(`${tasks.length} taches affichees`)
+              toast.success(`${tasks.length} tâches affichées`)
             }}
-          >
-            <CardContent className="pt-4">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-sm text-muted-foreground">Taches Totales</p>
-                  <p className="text-2xl font-bold">{tasks.length}</p>
-                </div>
-                <div className="h-10 w-10 rounded-full bg-[#593196]/10 flex items-center justify-center">
-                  <Calendar className="h-5 w-5 text-[#593196]" />
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-          <Card 
-            className="cursor-pointer transition-all hover:scale-[1.02] hover:shadow-lg hover:border-[#FC3939]/50"
-            onClick={() => toast.info("Aucune tache en retard actuellement")}
-          >
-            <CardContent className="pt-4">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-sm text-muted-foreground">En Retard</p>
-                  <p className="text-2xl font-bold text-[#FC3939]">0</p>
-                </div>
-                <div className="h-10 w-10 rounded-full bg-[#FC3939]/10 flex items-center justify-center">
-                  <AlertTriangle className="h-5 w-5 text-[#FC3939]" />
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-          <Card 
-            className="cursor-pointer transition-all hover:scale-[1.02] hover:shadow-lg hover:border-amber-500/50"
+          />
+          <InteractiveStatCard
+            label="En Retard"
+            value="0"
+            icon={AlertTriangle}
+            variant="danger"
+            onClick={() => toast.info("Aucune tâche en retard actuellement")}
+          />
+          <InteractiveStatCard
+            label="Chemin Critique"
+            value={tasks.filter(t => t.isCriticalPath).length}
+            icon={Clock}
+            variant="warning"
             onClick={() => {
               const criticalTasks = tasks.filter(t => t.isCriticalPath).map(t => t.name)
               toast.info(`Chemin critique: ${criticalTasks.join(", ")}`)
             }}
-          >
-            <CardContent className="pt-4">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-sm text-muted-foreground">Chemin Critique</p>
-                  <p className="text-2xl font-bold">{tasks.filter(t => t.isCriticalPath).length}</p>
-                </div>
-                <div className="h-10 w-10 rounded-full bg-amber-500/10 flex items-center justify-center">
-                  <Clock className="h-5 w-5 text-amber-500" />
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-          <Card 
-            className="cursor-pointer transition-all hover:scale-[1.02] hover:shadow-lg hover:border-emerald-500/50"
+          />
+          <InteractiveStatCard
+            label="Budget Carbone"
+            value={`${tasks.reduce((acc, t) => acc + t.carbonBudget, 0)} tCO2e`}
+            icon={Leaf}
+            variant="success"
             onClick={() => {
               const totalCarbon = tasks.reduce((acc, t) => acc + t.carbonBudget, 0)
-              toast.info(`Budget carbone total: ${totalCarbon} tCO2e - Objectif RE2020 respecte`)
+              toast.info(`Budget carbone total: ${totalCarbon} tCO2e - Objectif RE2020 respecté`)
             }}
-          >
-            <CardContent className="pt-4">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-sm text-muted-foreground">Budget Carbone</p>
-                  <p className="text-2xl font-bold">{tasks.reduce((acc, t) => acc + t.carbonBudget, 0)} <span className="text-sm font-normal">tCO2e</span></p>
-                </div>
-                <div className="h-10 w-10 rounded-full bg-emerald-500/10 flex items-center justify-center">
-                  <Leaf className="h-5 w-5 text-emerald-500" />
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
+          />
+        </StatCardList>
 
         <Card className="flex-1 overflow-hidden">
           <CardHeader className="pb-2">

@@ -1,5 +1,6 @@
 "use client"
 
+import { useNavigate } from "react-router-dom"
 import { FolderKanban, Users, Leaf, DollarSign, TrendingUp, TrendingDown, AlertTriangle } from "lucide-react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/shared/components/ui/card"
 import { Badge } from "@/shared/components/ui/badge"
@@ -44,6 +45,7 @@ const alerts = [
 ]
 
 export default function DashboardPage() {
+  const navigate = useNavigate()
   // const { t } = useLanguage()
   const t = (key: string) => key;
 
@@ -58,7 +60,10 @@ export default function DashboardPage() {
 
       {/* Stats Cards */}
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-        <Card className="bg-card">
+        <Card 
+          className="bg-card cursor-pointer hover:bg-muted/50 transition-colors"
+          onClick={() => navigate('/templates/projects')}
+        >
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">{t("totalProjects")}</CardTitle>
             <FolderKanban className="h-4 w-4 text-muted-foreground" />
@@ -71,7 +76,10 @@ export default function DashboardPage() {
             </p>
           </CardContent>
         </Card>
-        <Card className="bg-card">
+        <Card 
+          className="bg-card cursor-pointer hover:bg-muted/50 transition-colors"
+          onClick={() => navigate('/templates/resources')}
+        >
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">{t("activeTeams")}</CardTitle>
             <Users className="h-4 w-4 text-muted-foreground" />
@@ -83,7 +91,10 @@ export default function DashboardPage() {
             </p>
           </CardContent>
         </Card>
-        <Card className="bg-card">
+        <Card 
+          className="bg-card cursor-pointer hover:bg-muted/50 transition-colors"
+          onClick={() => navigate('/templates/green')}
+        >
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">{t("carbonFootprint")}</CardTitle>
             <Leaf className="h-4 w-4 text-muted-foreground" />
@@ -96,7 +107,10 @@ export default function DashboardPage() {
             </p>
           </CardContent>
         </Card>
-        <Card className="bg-card">
+        <Card 
+          className="bg-card cursor-pointer hover:bg-muted/50 transition-colors"
+          onClick={() => navigate('/templates/finance')}
+        >
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">{t("budget")}</CardTitle>
             <DollarSign className="h-4 w-4 text-muted-foreground" />
@@ -158,26 +172,37 @@ export default function DashboardPage() {
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="space-y-4">
-              {alerts.map((alert, index) => (
-                <div key={index} className="flex items-start gap-3 text-sm">
-                  <div
-                    className={`mt-0.5 h-2 w-2 rounded-full ${
-                      alert.type === "critical"
-                        ? "bg-destructive"
-                        : alert.type === "warning"
-                        ? "bg-chart-3"
-                        : "bg-chart-1"
-                    }`}
-                  />
-                  <div className="flex-1 space-y-1">
-                    <p className="text-foreground">{alert.message}</p>
-                    <p className="text-xs text-muted-foreground">{alert.time}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </CardContent>
+              <div className="space-y-4">
+                {alerts.map((alert, index) => {
+                  let href = "#"
+                  if (alert.type === "warning") href = "/templates/logistics/zfe"
+                  else if (alert.type === "critical") href = "/templates/resources"
+                  else if (alert.type === "info") href = "/templates/documents"
+                  
+                  return (
+                    <div 
+                      key={index} 
+                      className="flex items-start gap-3 text-sm cursor-pointer hover:bg-muted/50 p-2 rounded-md transition-colors"
+                      onClick={() => navigate(href)}
+                    >
+                      <div
+                        className={`mt-0.5 h-2 w-2 rounded-full ${
+                          alert.type === "critical"
+                            ? "bg-destructive"
+                            : alert.type === "warning"
+                            ? "bg-chart-3"
+                            : "bg-chart-1"
+                        }`}
+                      />
+                      <div className="flex-1 space-y-1">
+                        <p className="text-foreground">{alert.message}</p>
+                        <p className="text-xs text-muted-foreground">{alert.time}</p>
+                      </div>
+                    </div>
+                  )
+                })}
+              </div>
+            </CardContent>
         </Card>
       </div>
 
@@ -189,44 +214,48 @@ export default function DashboardPage() {
             <CardDescription>Performance des projets en cours</CardDescription>
           </CardHeader>
           <CardContent>
-            <div className="space-y-4">
-              {recentProjects.map((project, index) => (
-                <div key={index} className="flex items-center gap-4">
-                  <div className="flex-1 space-y-1">
-                    <p className="text-sm font-medium">{project.name}</p>
-                    <div className="flex items-center gap-2">
-                      <Badge
-                        variant={
-                          project.status === "Retard"
-                            ? "destructive"
-                            : project.status === "En cours"
-                            ? "default"
-                            : "secondary"
-                        }
-                        className="text-xs"
-                      >
-                        {project.status}
-                      </Badge>
-                      <span className="text-xs text-muted-foreground">{project.budget}</span>
-                    </div>
-                  </div>
-                  <div className="w-24">
-                    <div className="flex items-center justify-end gap-2">
-                      <div className="h-2 w-16 overflow-hidden rounded-full bg-secondary">
-                        <div
-                          className={`h-full rounded-full ${
-                            project.status === "Retard" ? "bg-destructive" : "bg-primary"
-                          }`}
-                          style={{ width: `${project.progress}%` }}
-                        />
+              <div className="space-y-4">
+                {recentProjects.map((project, index) => (
+                  <div 
+                    key={index} 
+                    className="flex items-center gap-4 cursor-pointer hover:bg-muted/50 p-2 rounded-md transition-colors -mx-2"
+                    onClick={() => navigate('/templates/projects')}
+                  >
+                    <div className="flex-1 space-y-1">
+                      <p className="text-sm font-medium">{project.name}</p>
+                      <div className="flex items-center gap-2">
+                        <Badge
+                          variant={
+                            project.status === "Retard"
+                              ? "destructive"
+                              : project.status === "En cours"
+                              ? "default"
+                              : "secondary"
+                          }
+                          className="text-xs"
+                        >
+                          {project.status}
+                        </Badge>
+                        <span className="text-xs text-muted-foreground">{project.budget}</span>
                       </div>
-                      <span className="text-xs text-muted-foreground">{project.progress}%</span>
+                    </div>
+                    <div className="w-24">
+                      <div className="flex items-center justify-end gap-2">
+                        <div className="h-2 w-16 overflow-hidden rounded-full bg-secondary">
+                          <div
+                            className={`h-full rounded-full ${
+                              project.status === "Retard" ? "bg-destructive" : "bg-primary"
+                            }`}
+                            style={{ width: `${project.progress}%` }}
+                          />
+                        </div>
+                        <span className="text-xs text-muted-foreground">{project.progress}%</span>
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))}
-            </div>
-          </CardContent>
+                ))}
+              </div>
+            </CardContent>
         </Card>
 
         {/* Budget Chart */}
