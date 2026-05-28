@@ -9,7 +9,6 @@ import {
   HelpCircle,
   Code2,
   CheckCircle2,
-  AlertCircle,
   MessageSquare,
   X,
   Send,

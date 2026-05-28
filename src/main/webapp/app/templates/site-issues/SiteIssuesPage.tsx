@@ -405,14 +405,12 @@ export default function SiteIssuesPage() {
                   }`}
                   onClick={() => setSelectedPhoto(photo)}
                 >
-                  <div className="aspect-video bg-muted">
-                    <Image
-                      src={photo.src}
-                      alt={photo.title}
-                      width={400}
-                      height={300}
-                      className="h-full w-full object-cover"
-                    />
+                  <div className="aspect-video bg-muted relative group">
+                    <img
+                        src={photo.src}
+                        alt={photo.title}
+                        className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                      />
                   </div>
                   <div className="absolute inset-0 flex items-end bg-gradient-to-t from-black/80 via-black/20 to-transparent p-3 opacity-0 transition-opacity group-hover:opacity-100">
                     <div>
@@ -551,12 +549,10 @@ export default function SiteIssuesPage() {
 
           {selectedPhoto && (
             <div className="border-b border-[#593196]/20 p-4">
-              <div className="aspect-video overflow-hidden rounded-lg bg-muted">
-                <Image
+              <div className="aspect-video overflow-hidden rounded-lg bg-muted relative">
+                <img
                   src={selectedPhoto.src}
                   alt={selectedPhoto.title}
-                  width={400}
-                  height={300}
                   className="h-full w-full object-cover"
                 />
               </div>

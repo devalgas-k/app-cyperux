@@ -240,7 +240,7 @@ export default function SiteDiaryPage() {
   const [uploadedPhotos, setUploadedPhotos] = useState<string[]>([])
   const [selectedDate, setSelectedDate] = useState<Date>(new Date())
   const [showDatePicker, setShowDatePicker] = useState(false)
-  const recordingIntervalRef = useRef<NodeJS.Timeout | null>(null)
+  const recordingIntervalRef = useRef<number | null>(null)
   const fileInputRef = useRef<HTMLInputElement | null>(null)
   const cameraInputRef = useRef<HTMLInputElement | null>(null)
   const sitePhotoInputRef = useRef<HTMLInputElement | null>(null)
@@ -248,7 +248,7 @@ export default function SiteDiaryPage() {
   const startRecording = () => {
     setIsRecording(true)
     setRecordingTime(0)
-    recordingIntervalRef.current = setInterval(() => {
+    recordingIntervalRef.current = window.setInterval(() => {
       setRecordingTime((prev) => prev + 1)
     }, 1000)
     
@@ -261,7 +261,7 @@ export default function SiteDiaryPage() {
   const stopRecording = () => {
     setIsRecording(false)
     if (recordingIntervalRef.current) {
-      clearInterval(recordingIntervalRef.current)
+      window.clearInterval(recordingIntervalRef.current)
     }
   }
 
@@ -327,7 +327,7 @@ export default function SiteDiaryPage() {
     
     setAiMessages((prev) => [
       ...prev,
-      { role: "user", content: aiInput },
+      { role: "user", content: aiInput, actions: [] },
     ])
     
     setTimeout(() => {
@@ -335,12 +335,9 @@ export default function SiteDiaryPage() {
         ...prev,
         {
           role: "assistant",
-          content: "J'ai analysé votre demande. Basé sur l'historique des aléas similaires sur ce projet, je recommande de faire intervenir l'équipe structure dans les 24h. Voulez-vous que je planifie cette intervention ?",
-          actions: [
-            { label: "Planifier l'intervention", action: "schedule" },
-            { label: "Voir historique", action: "history" },
-          ],
-        },
+          content: "Parfait. Le responsable QSE (Thomas) a été notifié par SMS. L'entreprise 'Gros Oeuvre Paris' a reçu une alerte sur son tableau de bord pour sécuriser la zone immédiatement. Une photo avant/après sera requise pour lever l'aléa.",
+          actions: []
+        }
       ])
     }, 1500)
     

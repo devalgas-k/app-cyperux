@@ -2,7 +2,6 @@
 
 import { useState, useCallback } from "react"
 import {
-  Recycle,
   Trash2,
   Truck,
   FileText,
@@ -19,12 +18,10 @@ import {
   X,
   Sparkles,
   Send,
-  ExternalLink,
   Upload,
   FileCheck,
   ScanLine,
   Building,
-  ArrowRight,
   RefreshCw,
 } from "lucide-react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/shared/components/ui/card"
@@ -188,7 +185,7 @@ export default function WasteRegisterPage() {
   const [isUploading, setIsUploading] = useState(false)
   const [uploadedFile, setUploadedFile] = useState<string | null>(null)
   const [aiAnalysis, setAiAnalysis] = useState<string | null>(null)
-  const [aiMessages, setAiMessages] = useState([
+  const [aiMessages, setAiMessages] = useState<Array<{ role: "ai" | "user" | "assistant"; content: string; action?: { label: string; type: string; } }>>([
     {
       role: "assistant",
       content: "Le centre de tri 'Recyc-BTP' n'a pas encore renvoyé le certificat de traitement pour le lot #452 (18t de gravats). Ce lot a été enlevé il y a 6 jours. Voulez-vous que j'envoie une relance automatique ?",
@@ -197,6 +194,11 @@ export default function WasteRegisterPage() {
         type: "reminder",
       },
     },
+    {
+      role: "assistant",
+      content: "Je remarque que le taux de valorisation des déchets bois est en baisse. Souhaitez-vous que je contacte notre partenaire de recyclage pour organiser une formation de sensibilisation des équipes sur site ?",
+      action: { label: "Organiser la formation", type: "primary" }
+    }
   ])
   const [aiInput, setAiInput] = useState("")
 
@@ -208,6 +210,7 @@ export default function WasteRegisterPage() {
       {
         role: "assistant",
         content: "J'ai analysé vos flux de déchets. Le béton de démolition représente 52% du volume total. Je suggère de mettre en place une filière de réemploi sur site pour réduire les coûts de transport de 30% et améliorer votre taux de valorisation.",
+        action: { label: "Mettre en place la filière", type: "primary" }
       },
     ])
     setAiInput("")

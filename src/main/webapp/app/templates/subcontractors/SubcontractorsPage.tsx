@@ -3,7 +3,6 @@
 import { useState } from "react"
 import {
   Building2,
-  CheckCircle,
   AlertTriangle,
   Clock,
   FileText,
@@ -13,18 +12,15 @@ import {
   RefreshCw,
   Mail,
   Phone,
-  ExternalLink,
   Shield,
   Calendar,
   Users,
   Euro,
-  MessageSquare,
   X,
   Sparkles,
   Send,
   Ban,
   Upload,
-  Download,
   Eye,
   ShieldAlert,
   ShieldCheck,
@@ -68,7 +64,6 @@ import {
   AlertTitle,
 } from "@/shared/components/ui/alert"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/shared/components/ui/tabs"
-// import { useLanguage } from "@/lib/i18n"
 import { toast } from "sonner"
 import { cn } from "@/shared/utils"
 import { useNavigate } from "react-router-dom"
@@ -289,7 +284,6 @@ export default function SubcontractorsPage() {
   const [statusFilter, setStatusFilter] = useState<string | null>(null)
   const [showBlockDialog, setShowBlockDialog] = useState(false)
   const [subToBlock, setSubToBlock] = useState<Subcontractor | null>(null)
-  const [uploadingDoc, setUploadingDoc] = useState<string | null>(null)
   const [aiMessages, setAiMessages] = useState<any[]>([
     {
       role: "assistant",
@@ -308,6 +302,10 @@ export default function SubcontractorsPage() {
   const [newSubContact, setNewSubContact] = useState("")
   const [newSubEmail, setNewSubEmail] = useState("")
   const [newSubPhone, setNewSubPhone] = useState("")
+
+  const handleDocUpload = (docName: string) => {
+    toast.success(`${docName} a été mis à jour`)
+  }
 
   const handleAddSubcontractor = () => {
     if (newSubName && newSubSiret && newSubTrade) {
