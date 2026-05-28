@@ -13,7 +13,7 @@ export function StatCardList({ children, className }: StatCardListProps) {
   return (
     <div 
       className={cn(
-        "flex gap-4 pb-4",
+        "flex gap-4 pb-4 pt-4 px-1 -mt-4 -mx-1",
         isScrollable ? "overflow-x-hidden hover:overflow-x-auto snap-x scroll-smooth" : "flex-wrap",
         className
       )}
